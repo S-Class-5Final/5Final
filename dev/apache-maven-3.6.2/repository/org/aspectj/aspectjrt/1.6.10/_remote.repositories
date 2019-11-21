@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Nov 20 20:35:36 KST 2019
+aspectjrt-1.6.10.jar>central=
+aspectjrt-1.6.10-sources.jar>central=
+aspectjrt-1.6.10.pom>central=

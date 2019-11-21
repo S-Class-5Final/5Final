@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Nov 20 20:43:08 KST 2019
+spring-webmvc-5.1.2.RELEASE-sources.jar>central=
+spring-webmvc-5.1.2.RELEASE.jar>central=
+spring-webmvc-5.1.2.RELEASE.pom>central=
