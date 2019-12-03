@@ -26,10 +26,5 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		return "home";
 	}
-	
-	@RequestMapping("mainpage.do")
-	public String mainPage() {
-		return "common/mainPage";
-	}
-	
+
 }

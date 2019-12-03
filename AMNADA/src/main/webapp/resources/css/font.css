@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+/*ÆùÆ®*/
+@font-face {
+    font-family: 'NanumSquareL';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../font/NanumSquareL.eot);
+    src: local('Nanum Square Light'),
+        local('NanumSquareL'),
+        url(../font/NanumSquareL.eot?#iefix) format('embedded-opentype'),
+        url(../font/NanumSquareL.woff2) format('woff2'),
+        url(../font/NanumSquareL.woff) format('woff'),
+        url(../font/NanumSquareL.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareR';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/NanumSquareR.eot);
+    src: local('Nanum Square Regular'),
+        local('NanumSquareR'),
+        url(../font/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+        url(../font/NanumSquareR.woff2) format('woff2'),
+        url(../font/NanumSquareR.woff) format('woff'),
+        url(../font/NanumSquareR.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareB';
+    font-style: bold;
+    font-weight: 700;
+    src: url(../font/NanumSquareB.eot);
+    src: local('Nanum Square Bold'), 
+        local('NanumSquareB'), 
+        url(../font/NanumSquareB.eot?#iefix) format('embedded-opentype'), 
+        url(../font/NanumSquareB.woff2) format('woff2'), 
+        url(../font/NanumSquareB.woff) format('woff'), 
+        url(../font/NanumSquareB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'CorpidC1s-Light';
+    font-style: normal;
+    font-weight: 300;
+    src: url(../font/CorpidC1s-Light.eot);
+    src: local('CorpidC1s-Light'), 
+        local('CorpidC1s-Light'), 
+        url(../font/CorpidC1s-Light.eot?#iefix) format('embedded-opentype'), 
+        url(../font/CorpidC1s-Light.woff2) format('woff2'), 
+        url(../font/CorpidC1s-Light.woff) format('woff'), 
+        url(../font/CorpidC1s-Light.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'CorpidC1s-Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/CorpidC1s-Regular.eot);
+    src: local('CorpidC1s-Regular'),
+        local('CorpidC1s-Regular'),
+        url(../font/CorpidC1s-Regular.eot?#iefix) format('embedded-opentype'),
+        url(../font/CorpidC1s-Regular.woff2) format('woff2'),
+        url(../font/CorpidC1s-Regular.woff) format('woff'),
+        url(../font/CorpidC1s-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'CorpidC1s-Bold';
+    font-style: bold;
+    font-weight: 600;
+    src: url(../font/CorpidC1s-Bold.eot);
+    src: local('CorpidC1s-Bold'), 
+        local('CorpidC1s-Bold'), 
+        url(../font/CorpidC1s-Bold.eot?#iefix) format('embedded-opentype'), 
+        url(../font/CorpidC1s-Bold.woff2) format('woff2'), 
+        url(../font/CorpidC1s-Bold.woff) format('woff'), 
+        url(../font/CorpidC1s-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'CorpidC1s-Block';
+    font-style: bold;
+    font-weight: 700;
+    src: url(../font/CorpidC1s-Block.eot);
+    src: local('CorpidC1s-Block'),
+        local('CorpidC1s-Block'),
+        url(../font/CorpidC1s-Block.eot?#iefix) format('embedded-opentype'),
+        url(../font/CorpidC1s-Block.woff2) format('woff2'),
+        url(../font/CorpidC1s-Block.woff) format('woff'),
+        url(../font/CorpidC1s-Block.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'CorpidC1s-Heavy';
+    font-style: bold;
+    font-weight: 900;
+    src: url(../font/CorpidC1s-Heavy.eot);
+    src: local('CorpidC1s-Heavy'),
+        local('CorpidC1s-Heavy'),
+        url(../font/CorpidC1s-Heavy.eot?#iefix) format('embedded-opentype'),
+        url(../font/CorpidC1s-Heavy.woff2) format('woff2'),
+        url(../font/CorpidC1s-Heavy.woff) format('woff'),
+        url(../font/CorpidC1s-Heavy.ttf) format('truetype');
+}
+

@@ -6,7 +6,9 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml
+		/WEB-INF/spring/spring-security.xml	<!-- 암호화 추가 후에 추가 해주자 -->
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -30,4 +32,30 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+<!-- 로그인 만들다가 MemberController부분에서 예외 처리할 때 작성할 부분 -->
+	<!-- 공용 에러 관련 참고해볼만한 사이트 : http://jhgan.tistory.com/13 -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>	<!-- 자바 예외 형식 클래스명 또는 에러 코드 -->
+		<location>/WEB-INF/views/common/errorPage.jsp</location> <!-- 해당하는 에러시 보여줄 페이지 -->
+	</error-page>
+	<!-- errorPage로 ㄱㄱ씽 -->
+	
+	<!-- 회원 가입시 이코딩 처리할 때 작성할 부분
+	     (한글 깨짐 방지 인코딩) -->
+	<filter>
+		<!-- filter 안에는 filter-name, filter-class, init-param을 추가해 준다.
+		 filter-name은 원하는대로 지정 가능 -->
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<!-- encoding 값을 UTF-8로 지정해 준다. -->
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>     
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>

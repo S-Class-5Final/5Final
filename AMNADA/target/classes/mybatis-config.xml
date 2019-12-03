@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 클래스들을 미리 만들어 놔야 별칭 지정 한 것에서 에러가 발생 하지 않는다. -->
+	<typeAliases>
+		<typeAlias type="com.fianl.AMANDA.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.fianl.AMANDA.member.model.vo.Hobby" alias="Hobby"/>
+		<typeAlias type="com.fianl.AMANDA.member.model.vo.MemberImg" alias="MemberImg"/>
+	</typeAliases>
+	
+	<!-- sql문들을 지닌 mapper.xml들을 등록 -->
+ 	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+	</mappers>
+	
+	<!-- 우선 member-mapper.xml만 만들고 로그인 부터 하자 -->
+	
+</configuration>
