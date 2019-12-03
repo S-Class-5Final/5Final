@@ -93,80 +93,76 @@ display: none;
         <li class="active nav1"><a href="#visual" class="scroll"></a></li>
         <li class="nav2"><a href="#service" class="scroll"></a></li>
         <li class="nav3"><a href="#interview" class="scroll"></a></li>
+        <li class="nav4"><a href="#notice" class="scroll"></a></li>
     </ul>
 </div>
 
 <div class="main container">
-			<div class="section visual" id="visual">
-				<div class="video_wrap">
-					<video id="video" autoplay loop muted>
-						<source src="resources/video/video.mp4" type="video/mp4">
-					</video>
-				</div>
-				<div class="content">
-					<div class="timg">					
-							<img src="resources/images/mainImg.png" id = "myimg">
+	<div class="section visual" id="visual">
+		<div class="video_wrap">
+			<video id="video" autoplay loop muted>
+				<source src="resources/video/video.mp4" type="video/mp4">
+			</video>
+		</div>
+		
+		<div class="content">
+			<div class="timg">					
+				<img src="resources/images/mainImg.png" id = "myimg">
+			</div>
+	<!-- 모달창 연습 -->
+			<div id="myModal" class="modal">
+		<!-- Modal content -->
+				<div class="modal-content">
+					<div>
+						<span class="close">&times;</span><br><br><br>
 					</div>
-				<!-- 모달창 연습 -->
-					<!-- The Modal -->
-					<div id="myModal" class="modal">
-
-						<!-- Modal content -->
-						<div class="modal-content">
-							<div>
-							<span class="close">&times;</span><br><br><br>
-							</div>
-							
-							
-							<div id="loginview">
-							<form action="mlogin.do" method="post">
-							<div class="textbox" id="divId">
-								<input type="text" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
-							</div>
-							<br>
-							<div class="textbox" id="divPassword">
-								<input type="password" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
-							</div>
-							<br>
-							<br>
-							<div class="textbox" id="loginbtn">
+			
+					<div id="loginview">
+					<form action="mlogin.do" method="post">
+						<div class="textbox" id="divId">
+							<input type="text" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
+						</div>
+						<br>
+						<div class="textbox" id="divPassword">
+							<input type="password" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
+						</div>
+						<br>
+						<br>
+						<div class="textbox" id="loginbtn">
 							<button type="submit">Login</button>
-							</div>
-							</form>
-							<br>
-							<div class = "textbox" id="kakaobtn">
-							
-							</div>
-							<div class = "textbox" id="loginbtn">
-								<button id="insertmemberview">회원가입</button> / <button>비밀번호 찾기</button>
+						</div>
+					</form>
+						<br>
+						<div class = "textbox" id="loginbtn">
+							<button id="insertmemberview">회원가입</button> / <button>비밀번호 찾기</button>
+						</div>
+					</div>
+		
+					<div id= "infoView">
+					<form action="minsert.do" method="post" id="memberjoinForm" enctype="multipart/form-data">
+						<div id="infoView1">
+						아이디(ID) : <input type= "text" name = "user_id"><br>
+						패스워드(PWD) : <input type = "password" name="user_pwd" ><br>
+						별명(Name) : <input type = "text" name="user_nick"><br>
+						성별 : 남 <input type="radio" name = "gender" class = "gender" value = "M"> &nbsp; 
+						여 : <input type = "radio" name = "gender" class = "gender" value="F"><br>
+						번호  : <input type="text" name = "phone1"> - 
+						<input type="text" name= "phone2"> - 
+						<input type="text" name = "phone3"><br>
+							<div class= "textbox" id="nextbtn">
+								<button type="button" id="nextpage1">다음</button>
 							</div>
 						</div>
-						
-						<div id= "infoView">
-							<form action="minsert.do" method="post" id="memberjoinForm" enctype="multipart/form-data">
-							<div id="infoView1">
-							아이디(ID) : <input type= "text" name = "user_id"><br>
-							패스워드(PWD) : <input type = "password" name="user_pwd" ><br>
-							별명(Name) : <input type = "text" name="user_nick"><br>
-							성별 : 남 <input type="radio" name = "gender" class = "gender" value = "M"> &nbsp; 
-							여 : <input type = "radio" name = "gender" class = "gender" value="F"><br>
-							번호  : <input type="text" name = "phone1"> - 
-							<input type="text" name= "phone2"> - 
-							<input type="text" name = "phone3"><br>
-							<div class= "textbox" id="nextbtn">
-							<button type="button" id="nextpage1">다음</button>
-							</div>
-							</div>
-							
-							<div id = "infoView2">
-							키 : <input type="number" name="height">&nbsp;
-							나이 : <input type = "number" name="age">&nbsp;
-							사는곳 : <input type="text" name="address"><br>
-							
-							동성 여부 : 예 : <input type="radio" name = "gay" class = "gay" value = "Y"> &nbsp; 
-							아니오 : <input type = "radio" name = "gay" class = "gay" value="N"><br>
-							한줄 소개 :  <input type= "text" name="user_into"><br>
-							<div id = "hobby">
+			
+					<div id = "infoView2">
+					키 : <input type="number" name="height">&nbsp;
+					나이 : <input type = "number" name="age">&nbsp;
+					사는곳 : <input type="text" name="address"><br>
+					
+					동성 여부 : 예 : <input type="radio" name = "gay" class = "gay" value = "Y"> &nbsp; 
+					아니오 : <input type = "radio" name = "gay" class = "gay" value="N"><br>
+					한줄 소개 :  <input type= "text" name="user_into"><br>
+						<div id = "hobby">
 							취미 : 
 							<input type="checkbox" id="movie" name = "movie" value = "Y">영화 &nbsp;
 							<input type="checkbox" id="sing" name = "sing" value = "Y">노래 &nbsp;
@@ -177,51 +173,39 @@ display: none;
 							<input type="checkbox" id="working" name = "working" value = "Y">산책&nbsp;
 							<input type="checkbox" id="poto" name= "poto" value = "Y">사진&nbsp;
 							<input type="checkbox" id="travel" name="travel" value = "Y">여행
-							</div>
-							<button type="button" id = "inforbtn">이전</button>
-							<button type="button" id = "lastpage">다음</button>
-							</div>
-							<div id = "infoView3">
-							<div id="Imglist"> 
+						</div>
+						<button type="button" id = "inforbtn">이전</button>
+						<button type="button" id = "lastpage">다음</button>
+					</div>
+					
+					<div id = "infoView3">
+						<div id="Imglist"> 
 							<div id="first">
 								<img id = "firstImg" width="300" height="300">
 							</div>
-							
 							<div id = "second">
 								<img id= "secondImg" width ="300" height = "300">
 							</div>
-							
 							<div id = "third">
 								<img id= "thirdImg" width ="300" height = "300">
 							</div>
-							</div>
-							<button type="button" id="nextpage">이전으로</button>
-														<div>
+						</div>
+					<button type="button" id="nextpage">이전으로</button><br>
+					
+						<div>
 							<button type="submit">회원 가입완료</button>
-							</div>
-															<div id = "fileArea" type ="hidden">
+						</div>
+						<div id = "fileArea" type ="hidden">
 							<input type = "file" id="thumbnailImg1" multuple="multuple" name="thumbnailImg1" onchange="LoadImg(this,1)">
 							<input type = "file" id="thumbnailImg2" multuple="multuple" name="thumbnailImg2" onchange="LoadImg(this,2)">
 							<input type = "file" id="thumbnailImg3" multuple="multuple" name="thumbnailImg3" onchange="LoadImg(this,3)">
-							</div>
-							</div>
-
-
-							</form>
-							</div>
 						</div>
-						
 						</div>
-						
-						
-					</div>
-					
-					
-					
+					</form>
 				</div>
-				
-				<script>
-				
+			</div>
+		</div>
+						<script>
 			     // Get the modal
 		        var modal = document.getElementById('myModal');
 		        var myimg = document.getElementById("myimg");
@@ -354,25 +338,14 @@ display: none;
 						$("#Imglist").disableSelection(); // 상자 선택만 하도록 함 텍스트를 선택 취소 할 수있게하려는 경우 유용합니다.
 						$("#Imglist").suffer();
 					});
+				</script>	
+	</div>
 				
-
-				</script>
-				<!-- 끝 -->
-
-   <!-- 이미지 삭제 -->
-
-;
-
-
-				
-				<!--content-->
-
-				<div class="btn_scroll">
-					<a href="#service" class="scroll">
-					<img src="resources/images/btn_scroll_down.png" alt="스크롤다운" /></a>
-				</div>
-			</div>
-			<!--//section-->
+		<div class="btn_scroll">
+			<a href="#service" class="scroll">
+			<img src="resources/images/btn_scroll_down.png" alt="스크롤다운" /></a>
+		</div>
+	</div>
 
     <div class="section service" id="service">
         <ul class="slider">
@@ -380,9 +353,9 @@ display: none;
                     <div class="slider_img"></div>
                     <div class="content">
                         <div class="text_wrap">
-                            <p class="title_st1 eng">AMNADA</p>
-                                <!-- <p class="f_logo">
-                                <img src="/public/upload/20190322/f9e7af5a30ffecfa390f807566bd0fcd.jpg" /></p> -->
+                            <p class="title_st1 eng">당신의 연예는</p>
+                                 <p class="f_logo">
+                                <img src="resources/face/G.JPG" /></p> 
                                 <p class="f_name">아</p>
                                 <p class="f_description">아무나</p>
                         </div>
@@ -401,7 +374,7 @@ display: none;
                     <div class="slider_img"></div>
                     <div class="content">
                         <div class="text_wrap">
-                            <p class="title_st1 eng">SERVICE</p>
+                            <p class="title_st1 eng">언제 어디서 든지 </p>
                                 <!-- <p class="f_logo"><img src="/public/upload/20190403/e09687523ec0d37ee5e86882979561aa.png" /></p> -->
                                 <p class="f_name">만</p>
                                 <p class="f_description">만난</p>
@@ -420,7 +393,7 @@ display: none;
                     <div class="slider_img"></div>
                     <div class="content">
                         <div class="text_wrap">
-                            <p class="title_st1 eng">SERVICE</p>
+                            <p class="title_st1 eng">아만다에서 만나세요</p>
                                 <!-- <p class="f_logo"><img src="/public/upload/20190322/49c3cc4c3f202dab5813136402dc48fe.jpg" /></p> -->
                                 <p class="f_name">다</p>
                                 <p class="f_description">다</p>
@@ -446,7 +419,8 @@ display: none;
 			<div class="section interview" id="interview">
 				<ul class="slider">
 					<li>
-						<div class="slider_img"><img src="resources/face/G.jpg" />
+						<div class="slider_img">
+						<img src="resources/face/G.jpg"/>
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -494,7 +468,7 @@ display: none;
 					</li>
 					<li>
 						<div class="slider_img">
-							<img src="resources/face/t4.jpg" />
+							<img src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -519,7 +493,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/2e27759e62d16022e53573ca61a0bd5f.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -544,7 +518,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/eeeb7692b21d537372290d2fef160dce.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -569,7 +543,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/78a6d987d636e1fa24973710c4c2b02b.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -595,7 +569,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/9e311d5d5f41683b6be895522262fbab.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -620,7 +594,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/8cf72b0e3736e028a9843fdd32982d6c.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -645,7 +619,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/afd1f7b6d0c41c168b6c1c44a13f65c7.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -670,7 +644,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/8b3f15b5e9c1b6a136bbab9a29268f5c.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -695,7 +669,7 @@ display: none;
 					<li>
 						<div class="slider_img">
 							<img
-								src="/public/upload/20190321/b61761cb1cf120c1c0450e82b31fcd6b.jpg" />
+								src="resources/face/O.jpg" />
 						</div>
 						<div class="content">
 							<p class="title_st1 eng">INTERVIEW</p>
@@ -720,6 +694,39 @@ display: none;
 				</ul>
 			</div>
 			<!--//section-->
+			  <div class="section notice" id="notice">
+        <div class="content">
+            <div class="left">
+                <p class="title_st1 eng">CAREER</p>
+                <div class="notice_wrap">
+                    <p class="title">채용 정보</p>
+
+                    <ul>
+                                                                                <li>
+                                    <p class="left" style="width=100%">
+                                        <span class="career">[경력]</span><a href="https://grnh.se/ec16cf522" target="_blank">Sr.Analyst - Business Analyst</a>
+                                    </p>
+                                </li>
+                                                                                                        <li>
+                                    <p class="left" style="width=100%">
+                                        <span class="career">[경력]</span><a href="https://grnh.se/553afb922" target="_blank">Sr. Manager - 전략팀장</a>
+                                    </p>
+                                </li>
+                                                                    </ul>
+                    <a href="/career#recruitment" class="btn_employment_information"><img src="/public/images/btn_view_more.png" alt="더보기" /></a>
+                </div>
+            </div>
+            <div class="center">
+                <p class="title_st1 eng">CH. HERO</p>
+                <a href="/pr#ch_hero" class="btn_ch_hero"><img src="/public/images/main_ad1.jpg" alt="채널히어로" /></a>
+            </div>
+            <div class="right">
+                <p class="title_st1 eng">HERO BENEFIT</p>
+                <a href="/career#dh_culture" class="btn_benefit"><img src="/public/images/main_ad2.jpg" alt="다양한문화" /></a>
+            </div>
+        </div>
+        <!--content-->
+    </div>
     <!--//section-->
 </div>
 </div>
