@@ -15,10 +15,13 @@
     <script type="text/javascript" src="resources/js/jquery.bpop.js"></script>
     <script type="text/javascript" src="resources/js/delivery_hero.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <!-- 이메일 js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
     <style>
 .tImg {
 	margin-left: 400px;
 	margin-top: 300px;
+	
 }
 
 #service {
@@ -84,6 +87,10 @@ display: none;
 #infoView3{
 display: none;
 }
+#pwdCheckView{
+display:none;
+
+}
 </style>
 </head>
 <body>
@@ -118,49 +125,85 @@ display: none;
 					</div>
 			
 					<div id="loginview">
-					<form action="mlogin.do" method="post">
+					<form action="mlogin.do" method="post" id="loginviewform">
 						<div class="textbox" id="divId">
-							<input type="text" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
+							<input type="text" id ="loginId" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
 						</div>
 						<br>
 						<div class="textbox" id="divPassword">
-							<input type="password" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
-						</div>
+							<input type="password" id="loginPwd" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
+						</div> 
 						<br>
 						<br>
 						<div class="textbox" id="loginbtn">
-							<button type="submit">Login</button>
+							<button type="button" onclick="loginCheck()">Login</button>
 						</div>
 					</form>
 						<br>
 						<div class = "textbox" id="loginbtn">
-							<button id="insertmemberview">회원가입</button> / <button>비밀번호 찾기</button>
+							<button id="insertmemberview">회원가입</button> / <button type = "button" id="pwdCheck">비밀번호 찾기</button>
 						</div>
 					</div>
-		
+					
+					<div id ="pwdCheckView">
+					<form action="mSerchPwd.do" method = "post" id="SerchPwdForm">
+ 						<div class="textbox">
+						<input type="text" id = "serchId" name="serchId" size="60px" placeholder="ex) OOOO@naver.com"> &nbsp;
+						<input type="hidden" id="findPwd" name="findPwd">
+						<button type="button" id="serchPwd" onclick="serchPwdbtn()">찾기</button>
+					
+						</div>
+					</form>
+					</div>
+					
 					<div id= "infoView">
-					<form action="minsert.do" method="post" id="memberjoinForm" enctype="multipart/form-data">
+					<form action="minsert.do" method="post" id="memberjoinForm" enctype="multipart/form-data" onsubmit = "toEnabled()">
 						<div id="infoView1">
-						아이디(ID) : <input type= "text" name = "user_id"><br>
-						패스워드(PWD) : <input type = "password" name="user_pwd" ><br>
-						별명(Name) : <input type = "text" name="user_nick"><br>
-						성별 : 남 <input type="radio" name = "gender" class = "gender" value = "M"> &nbsp; 
+						<div id="checkId">
+						아이디(ID) : <input type= "text" name = "user_id" id="user_id" oninput = "checkId()"> @
+						<select id="email" name="email" style="width: 200">
+							<option value="naver.com">naver.com</option>
+							<option value="hanmail.net">hanmail.net</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="nate.com">nate.com</option>
+							<option value="1">직접입력</option>
+						</select> &nbsp;&nbsp;
+						<input type="text" name="user_email" id = "user_email" disabled> <br>
+						<div id="checkIdtext">아이디를 입력 해주세요</div>
+						</div><br>
+						<div id="checkPwd">
+						패스워드(PWD) : <input type = "password" name="user_pwd" id="user_pwd">&nbsp;&nbsp;
+						패스워드 확인(PWD) : <input type = "password" name = "user_pwdC" id="user_pwdC"><br>
+						<div id ="checkPwdtext">비밀번호를 입력하세요 </div>
+						</div>
+						<div id="checkNick">
+						별명(Name) : <input type = "text" name="user_nick" id="user_nick"><br>
+						<div id= "checkNicktext"></div>
+						</div>
+						성별 : 남 <input type="radio" name = "gender" class = "gender" value = "M" checked="checked"> &nbsp; 
 						여 : <input type = "radio" name = "gender" class = "gender" value="F"><br>
-						번호  : <input type="text" name = "phone1"> - 
-						<input type="text" name= "phone2"> - 
-						<input type="text" name = "phone3"><br>
+						번호  : 
+						<select id="phone1" name="phone1" style="width: 200">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="019">019</option>
+						</select> -
+						<input type="text" name= "phone2" id="phone2"> - 
+						<input type="text" name = "phone3" id="phone3"><br>
 							<div class= "textbox" id="nextbtn">
 								<button type="button" id="nextpage1">다음</button>
 							</div>
 						</div>
 			
 					<div id = "infoView2">
-					키 : <input type="number" name="height">&nbsp;
-					나이 : <input type = "number" name="age">&nbsp;
-					사는곳 : <input type="text" name="address"><br>
+					키 : <input type="number" name="height" id= "height">&nbsp;
+					나이 : <input type ="number" name="age" id = "age">&nbsp;
+					사는곳 : <input type="text" name="address" id = "address"><br>
 					
 					동성 여부 : 예 : <input type="radio" name = "gay" class = "gay" value = "Y"> &nbsp; 
-					아니오 : <input type = "radio" name = "gay" class = "gay" value="N"><br>
+					아니오 : <input type = "radio" name = "gay" class = "gay" value="N" checked="checked"><br>
 					한줄 소개 :  <input type= "text" name="user_into"><br>
 						<div id = "hobby">
 							취미 : 
@@ -191,10 +234,11 @@ display: none;
 							</div>
 						</div>
 					<button type="button" id="nextpage">이전으로</button><br>
-					
-						<div>
-							<button type="submit">회원 가입완료</button>
-						</div>
+					<button type="button" id="minsertbtn" onclick="abc()">가입</button><br>
+<!-- 						<div style="z-index: 100">
+						<button type="button" id="nextpage">이전으로</button><br>
+							<button type="button" id = "minsertbtn">회원 가입완료</button>
+						</div> -->
 						<div id = "fileArea" type ="hidden">
 							<input type = "file" id="thumbnailImg1" multuple="multuple" name="thumbnailImg1" onchange="LoadImg(this,1)">
 							<input type = "file" id="thumbnailImg2" multuple="multuple" name="thumbnailImg2" onchange="LoadImg(this,2)">
@@ -206,7 +250,10 @@ display: none;
 			</div>
 		</div>
 						<script>
-			     // Get the modal
+
+
+
+				// Get the modal
 		        var modal = document.getElementById('myModal');
 		        var myimg = document.getElementById("myimg");
 		        // Get the <span> element that closes the modal
@@ -220,7 +267,8 @@ display: none;
 		      
 		        // 회원가입 버튼 눌렀을시
 		        var insertmemberview = document.getElementById("insertmemberview");
-		        
+		        // 비밀번호 찾기 
+		        var pwdCheckView = document.getElementById("pwdCheckView");
 		        
 		        // 취미란
 		        var nextpage1 = document.getElementById("nextpage1");
@@ -238,6 +286,19 @@ display: none;
 		        
 		        // 사진 넣는 곳 보내는 버튼
 		        var lastpage = document.getElementById('lastpage');
+		        //유효성 체크 var
+		        var idUsable = false;
+		        var pwdUsable = false;
+		        var nickUsable = false;
+		        var phoneUsable = false;
+		        var heightUsable = false;
+		        var ageUsable = false;
+		        var addressUsable = false;
+		        var imgtitle = false;
+		        var imgsub = false;
+		        var imgsp = false;
+		        var imgcount = 0;
+		        var Hobbycount = 0;
 		        
 		        myimg.onclick = function() {
 		            modal.style.display = "block";
@@ -253,11 +314,36 @@ display: none;
 		        	infoView3.style.display = "none";
 		        }
 		        
-		        
 		        nextpage1.onclick=function(){
+		        	if(idUsable ==true && pwdUsable ==true && nickUsable ==true && phoneUsable ==true){
 		        	infoView1.style.display = "none";
 		        	infoView2.style.display = "block";
 		        	infoView3.style.display = "none";
+		        	}else{
+		        		if (idUsable == false) {
+							alert('아이디를 확인해 주세요');
+							insertmemberview.onclick();
+							return false;
+						}
+
+						if (pwdUsable == false) {
+							alert('비밀번호를 확인 해주세요');
+							insertmemberview.onclick();
+							return false;
+						}
+
+						if (nickUsable == false) {
+							alert('닉네임을 확인해주세요');
+							insertmemberview.onclick();
+							return false;
+						}
+
+						if (phoneUsable == false) {
+							alert("휴대폰 확인");
+							insertmemberview.onclick();
+							return false;
+						}
+		        	}
 		        } 
 		        inforbtn.onclick=function(){
 		        	infoView1.style.display = "block";
@@ -266,15 +352,49 @@ display: none;
 		        }
 		        
 		        lastpage.onclick=function(){
+		        	if(phoneUsable ==true && heightUsable == true && ageUsable==true && addressUsable==true &&
+		        			Hobbycount>=3)
+		        	{
 		        	infoView1.style.display = "none";
 		        	infoView2.style.display = "none";
 		        	infoView3.style.display = "block";
+		        	}else{
+
+
+						if (ageUsab == false) {
+							alert("나이가 안써있어요!");
+							return false;
+							nextpage1.onclick();
+						}
+
+						if (heightUsable == false) {
+							alert('키가 없어요 ㅠ');
+							nextpage1.onclick();
+							return false;
+						}
+
+						if (addressUsable == false) {
+							alert('사는곳이 공백이네요');
+							nextpage1.onclick();
+							return false;
+						}
+						
+		        		if (Hobbycount < 2) {
+							alert("흥미는  3개 이상 눌러주시길 바랍니다.");
+							nextpage1.onclick();
+							return false;
+						}
+		        	}
 		        }
 		        
 		        nextpage.onclick=function(){
 		        	infoView1.style.display = "none";
 		        	infoView2.style.display = "block";
 		        	infoView3.style.display = "none";
+		        }
+		        pwdCheck.onclick=function(){
+		        	loginview.style.display = "none";
+		        	pwdCheckView.style.display = "block";
 		        }
 		        
 		        // When the user clicks on <span> (x), close the modal
@@ -287,6 +407,113 @@ display: none;
 		                modal.style.display = "none";
 		            }
 		        } */
+		        
+		        // 로그인 처리
+		        function loginCheck(){
+		        	
+		        	var loginId = $("#loginId");
+		        	var loginPwd = $("#loginPwd");
+		        	
+		        	if(loginId.val().length ==''){
+		        		alert("아이디 란이 비어있어요!");
+		        	}else{
+		        		if(loginPwd.val().length== 0){
+		        			alert("비밀번호 란이 비어있어요!");
+		        		}else{
+ 		        			$.ajax({
+		              		  url:"mloginCheck.do",
+		                	data:{
+		              	  	user_id:loginId.val(),
+		              	  	user_pwd:loginPwd.val()
+		              	  	},
+		                success:function(msg){
+		                	switch(msg){
+		                	case "0":{
+		                		alert("아이디를 확인해 주세요");
+		                		break;
+		                	}
+		                	case "1":{
+		                		alert("비밀번호를 확인해주세요");
+		                		break;
+		                		}
+		                	case "2":{
+		                		$("#loginviewform").submit();
+		                	}
+		                	}
+		                		
+		                },
+		                error:function(request, status, errorData){
+		      				alert("error code: " + request.status + "\n"
+		      						+"message: " + request.responseText
+		      						+"error: " + errorData);
+		      			}
+		             });  
+		        		}
+		        		
+		        	}
+
+		        }
+		        
+		        //비밀번호 찾기
+		        function serchPwdbtn(){
+		        	var serchId = $("#serchId");
+		        	
+		        	
+		        	if(serchId.val().length==''){
+		        		alert("아이디를 필수로 입력하셔야 겠죠?");
+		        	}else{
+		        			$.ajax({
+			              		  url:"minsertIdCheck.do",
+			                	data:{
+			              	  	user_id:serchId.val(),
+			              	  	},
+			                success:function(IDCheck){
+							if(IDCheck =="false"){
+								//임시 비밀번호
+		            var text = "";
+		            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?!";
+       		    	for (var i = 0; i < 7; i++) {
+			               text += possible.charAt(Math.floor(Math.random()* possible.length));
+			            }
+       		    	
+	        		    var data = {
+	        		    	    service_id: 'jang_jun_ha',
+	        		    	    template_id: 'template_ruYgHWzb',
+	        		    	    user_id: 'user_bcxE963izU0XoV5jKMmvq',
+	        		    	    template_params: {
+	        		    	        'username': 'JunHa',
+	        		    	        'g-recaptcha-response': '03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...',
+	        		    	        'user_Email' : serchId.val() ,
+	        		    	        'message_html' : text
+	        		    	    }
+	        		    	};
+	        		    	 
+	        		    	$.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+	        		    	    type: 'POST',
+	        		    	    data: JSON.stringify(data),
+	        		    	    contentType: 'application/json'
+	        		    	}).done(function() {
+	        		    	    alert('임시비밀번호가 전송이 되었습니다.');
+	        		    	    $("#findPwd").val(text);
+	        		    	    
+	        		    	    $("#SerchPwdForm").submit();
+	        		    	}).fail(function(error) {
+	        		    	    alert('죄송합니다. 보내지 못하였습니다.');
+	        		    	}); 
+
+							}else{
+								alert("가입이 되지 않은 아이디네요!");
+							}
+			                		
+			                },
+			                error:function(request, status, errorData){
+			      				alert("error code: " + request.status + "\n"
+			      						+"message: " + request.responseText
+			      						+"error: " + errorData);
+			      			}
+			             });
+		        	} 
+		        }
 		        
 		         $(function(LoadImg){
    					$("#fileArea").hide(); 
@@ -304,41 +531,466 @@ display: none;
 				      });
 				   
 				   });
-		         
-		         
-  
    					// 이미지 업로드 
 
 					function LoadImg(value, num) {
 						if (value.files[0] != undefined) {
-							// value는 함수를 발동시킨 객체(file타입 input태그)이고
-							// value.files[0]은 input태그로 파일을 선택 했으면 undefined가 아니고 선택 안했으면 undefined다.
 							var reader = new FileReader();
-
 							reader.onload = function(e) {
 								switch (num) {
 								case 1:
 									$("#firstImg").attr("src", e.target.result);
+									imgtitle = true;
+									alert(imgtitle);
 									break;
 								case 2:
 									$("#secondImg").attr("src", e.target.result);
+									imgsub = true;
 									break;
 								case 3:
 									$("#thirdImg").attr("src", e.target.result);
+									imgsp = true;
 									break;
 								}
-
 							}
 							reader.readAsDataURL(value.files[0]);
 						}
 					}
-
+   					
+	
 				$(function() {
 						$("#Imglist").sortable(); // id가 "sortable" 인 태그의 내부에 포함된 태그를 사용해서 드래그 가능한 리스트를 만듦
 						$("#Imglist").disableSelection(); // 상자 선택만 하도록 함 텍스트를 선택 취소 할 수있게하려는 경우 유용합니다.
 						$("#Imglist").suffer();
 					});
-				</script>	
+				//이메일 변경 및 전체 유효성 검사
+				function toEnabled() {
+		         $("#user_email").attr("disabled",false);   // 메일주소 제대로 넘어가게
+		     	 }
+
+				
+		      $(function(){
+	         	 $("#user_email").val($("#email option").eq(0).val());
+		       });
+				
+		      $('#email').change(function(){
+		          $("#email option:selected").each(function () {
+		            if($(this).parent().val()== "1"){ // 직접입력일 경우
+		               $("#user_email").val(""); // 값 초기화
+		               $("#user_email").attr("disabled",false); // 활성화
+		               checkId();
+		            }else{ // 직접입력이 아닐경우
+		               $("#user_email").val($(this).parent().val()); // 선택값 입력
+		               $("#user_email").attr("disabled",true); // 비활성화
+		               checkId();
+		            }
+		         }); 
+		      });
+		      
+				//유효성 검사 실행 하자
+ 				
+ 				var engCheck = /^[a-zA-Z0-9]*$/;
+    			function checkId(){
+         		var user_id = $("#user_id");
+				var checkIdtext = $("#checkIdtext");
+         		
+		         	if(!engCheck.test(user_id.val())){
+		            	alert("영어 및 숫자만 입력가능합니다.");
+		           		user_id.val('');
+		           		$("#checkId").css('background','rgb(255,0,0,0.4)');
+		           		$("#checkId").css('border-radius','20px 20px 20px 20px');
+		           		checkIdtext.html('다시 입력 해주세요!')
+		           		idUsable = false;
+		       		  }else{
+		       			  if(user_id.val().length==0){
+		       				$("#checkId").css('background','');
+		       				checkIdtext.html('아이디를 입력 해주세요');
+		       				idUsable = false;
+		       			  }
+		       			  else{
+		       				$('#checkId').focusout(function() {
+				         		   var user_id = $("#user_id");
+				            		var user_email = $("#user_email");
+				         			$.ajax({
+				              		  url:"minsertIdCheck.do",
+				                	data:{
+				              	  	user_id:user_id.val(),
+				              	  	user_email:user_email.val()},
+				                success:function(IDCheck){
+				                   	if(IDCheck == "true"){
+				                   	 if(user_id.val().length==0){
+						       				$("#checkId").css('background','');
+						       				checkIdtext.html('아이디를 입력 해주세요');
+						       				idUsable = false;
+						       			  }else{
+						            	$("#checkId").css('background','rgb(0,255,0,0.4)');
+						            	checkIdtext.html('가입 가능한 아이디 입니다.');
+						            	idUsable = true;
+						       			  }
+				                   	}
+				                   	else{
+						           		$("#checkId").css('background','rgb(255,0,0,0.4)');
+						           		$("#checkId").css('border-radius','20px 20px 20px 20px');
+						           	
+						           		user_id.focus();
+						           		checkIdtext.html('이미 가입된 아이디 입니다.');
+						           		idUsable = false;
+				                   	}
+				                },
+				                error:function(request, status, errorData){
+				      				alert("error code: " + request.status + "\n"
+				      						+"message: " + request.responseText
+				      						+"error: " + errorData);
+				      			}
+				             }); 
+				         		});
+		       			  }
+		        		 }
+		         	
+		         	}; 
+		         	
+	//비밀번호 부분
+
+$(function() {
+         $('#user_pwd').keyup(function() {
+        	 var pwdCheck = /^[a-zA-Z0-9]*$/;
+        	 
+        	 if(!pwdCheck.test($("#user_pwd").val())){
+        		$("#checkPwd").css('background','rgb(255,0,0,0.4)');
+	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+	           	$("#checkPwdtext").html("특수문자 및 공백을 쓰시면 안되요!");
+	           	$("#user_pwd").val('');
+	           	pwdUsable = false;
+        	 }else{
+        		 if($("#user_pwd").val().length==0){
+        			$("#checkPwd").css('background','');
+      	           	$("#checkPwdtext").html("비밀번호를 입력 해 주세요!");
+      	          pwdUsable = false;
+        		 }else{
+        			 $("#checkPwd").css('background','rgb(0,255,0,0.4)');
+      	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+      	           	$("#checkPwdtext").html("잘 입력 되고 있어요");	 
+        		 }
+        	 }
+         });
+		$('#user_pwd').focusout(function(){
+			if($("#user_pwd").val().length==0){
+				$("#checkPwd").css('background','rgb(255,0,0,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호칸이 비어있어요");
+  	         pwdUsable = false;
+			}else{
+			if($("#user_pwd").val() != $("#user_pwdC").val()){
+				$("#checkPwd").css('background','rgb(0,0,255,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호 확인란을 작성해 주세요");	 
+  	         pwdUsable = false;
+			}else{
+				$("#checkPwd").css('background','rgb(0,255,255,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호 일치 합니다.");
+  	          pwdUsable = true;
+			}
+			}
+		});
+		$('#user_pwdC').keyup(function() {
+       	 var pwdCheck = /^[a-zA-Z0-9]*$/;
+       	 
+       	 if(!pwdCheck.test($("#user_pwdC").val())){
+       		$("#checkPwd").css('background','rgb(255,0,0,0.4)');
+	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+	           	$("#checkPwdtext").html("특수문자 및 공백을 쓰시면 안되요!");
+	           	$("#user_pwdC").val('');
+	           	pwdUsable = false;
+       	 }else{
+       		 if($("#user_pwdC").val().length==0){
+       			$("#checkPwd").css('background','');
+     	           	$("#checkPwdtext").html("비밀번호를 입력 해 주세요!");
+     	           pwdUsable = false;
+       		 }else{
+       			 $("#checkPwdC").css('background','rgb(0,255,0,0.4)');
+     	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+     	           	$("#checkPwdtext").html("잘 입력 되고 있어요");	 
+       		 }
+       	 }
+        });
+		
+		$('#user_pwdC').focusout(function(){
+			if($("#user_pwdC").val().length==0){
+				$("#checkPwd").css('background','rgb(255,0,0,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호 확인란이 비어있어요");
+  	          pwdUsable = false;
+			}else{
+			if($("#user_pwd").val() != $("#user_pwdC").val()){
+				$("#checkPwd").css('background','rgb(0,0,255,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호를 일치시켜주세요");	 
+  	          pwdUsable = false;
+			}else{
+				$("#checkPwd").css('background','rgb(0,255,255,0.4)');
+  	           	$("#checkPwd").css('border-radius','20px 20px 20px 20px');
+  	           	$("#checkPwdtext").html("비밀번호 일치 합니다.");
+  	          pwdUsable = true;
+			}
+			}
+		});
+      });
+      
+      
+      //닉네임
+      
+      
+      $(function(){
+         $("#user_nick").focusout(function(){
+            var user_nick = $("#user_nick");
+            if(user_nick.val().length == 0){
+                $("#checkNick").css('background','rgb(255,0,0,0.4)');
+ 	           	$("#checkNick").css('border-radius','20px 20px 20px 20px');
+ 	           	$("#checkNicktext").html("닉네임 창이 비어있어요");
+ 	           nickUsable = false;
+            }else{
+               $.ajax({
+                  url:"minsertNickCheck.do",
+                  data:{user_nick:user_nick.val()},
+                  success:function(NickCheck){
+                	  if(NickCheck == "true"){
+		                   	 if(user_nick.val().length==0){
+				       				$("#checkNick").css('background','');
+				       				$("#checkNicktext").html("닉네임 창이 비어있어요");
+				       				nickUsable = false;
+				       			  }else{
+				            	$("#checkNick").css('background','rgb(0,255,0,0.4)');
+				            	$("#checkNicktext").html("사용가능한 닉네임이에요");
+				            	nickUsable = true;
+				       			  }
+		                   	}else{
+				           		$("#checkNick").css('background','rgb(255,0,0,0.4)');
+				           		$("#checkNick").css('border-radius','20px 20px 20px 20px');
+				           	
+				           		 user_nick.focus();
+				           		$("#checkNicktext").html("이미 사용된 닉네임이에요");
+				           		nickUsable = false;
+		                   	}
+                  },
+                  error:function(request, status, errorData){
+	      				alert("error code: " + request.status + "\n"
+	      						+"message: " + request.responseText
+	      						+"error: " + errorData);
+	      			}
+               });
+            }
+         });
+      });
+      
+      //휴대폰 유효성 검사
+      
+      $(function(){
+    	 var phone2 = $("#phone2");
+    	 var phone3 = $("#phone3");
+    	 var intCheck = /^[0-9]*$/;
+    	 
+    	 phone2.keyup(function(){
+    		 if(!intCheck.test(phone2.val())){
+    			 alert("숫자만입력하세요");
+    			 phone2.val('');
+    			 phoneUsable = false;
+    		 }else if(phone2.val().length==4){
+    			 phone3.focus();
+        	 }else{
+        		 
+        	 }	 
+    		 
+    	 });
+    	 
+    	 phone3.keyup(function(){
+    		 if(phone3.val().length <4  && !intCheck.test(phone3.val())){
+    			 alert("숫자만입력하세요");
+    			 phone3.val('');
+    			 phoneUsable = false;
+    		 }else if(phone3.val().length==4){
+    			 $("#nextpage1").focus();
+    			 phoneUsable = true;
+        	 }
+    	 });
+      });
+      
+      //키 / 나이 / 주소 입력 유효성 검사
+      
+      $(function(){
+    	 var height = $("#height");
+    	 
+    	 var age = $("#age");
+    	 var address = $("#address");
+    	 
+    	 var intCheck = /^[0-9]*$/;
+    	 var korCheck = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z]*$/;
+    	 height.keyup(function(){
+    		 if(height.val().length <3  && !intCheck.test(height.val())){
+    			 alert("숫자만입력하세요");
+    			 height.val('');
+    			 heightUsable = false;
+    		 }else if(height.val().length==3){
+    			 age.focus();
+    			 heightUsable = true;
+    			 
+        	 }
+    	 });
+    	 
+    	 age.keyup(function(){
+    		 if(age.val().length <2  && !intCheck.test(age.val())){
+    			 alert("숫자만입력하세요");
+    			 age.val('');
+    			 ageUsable = false;
+    		 }else if(age.val().length==2){
+    			 address.focus();
+    			 ageUsable = true;
+        	 }
+    	 });
+    	 
+    	 address.keyup(function(){
+    		 if(!korCheck.test(address.val())){
+    			 alert("문자 및 영문만 됩니다.");
+    			 address.val('');
+    			 addressUsable = false;
+    		 }else{
+    			 addressUsable = true;
+    		 }
+    	 });
+      });
+      
+      //체크 박스 유효성 검사
+      $(function(){
+    	  $("#movie").change(function(){
+        	  if($("#movie").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#movie").val('Y');
+        		  alert($("#movie").val());
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#movie").val('N');
+      			alert($("#movie").val());
+      		}  
+    	  });
+    	  
+    	  $("#sing").change(function(){
+        	  if($("#sing").is(":checked")){
+        		  $("#sing").val('Y');
+        		  Hobbycount = Hobbycount +1;
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#sing").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#game").change(function(){
+        	  if($("#game").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#game").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#game").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#jmt").change(function(){
+        	  if($("#jmt").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#jmt").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#jmt").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#pet").change(function(){
+        	  if($("#pet").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#pet").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#pet").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#cafe").change(function(){
+        	  if($("#cafe").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#cafe").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#cafe").val('Y');
+      		}  
+    	  });
+    	  
+    	  $("#working").change(function(){
+        	  if($("#working").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#working").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#working").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#poto").change(function(){
+        	  if($("#poto").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#poto").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#poto").val('N');
+      		}  
+    	  });
+    	  
+    	  $("#travel").change(function(){
+        	  if($("#travel").is(":checked")){
+        		  Hobbycount = Hobbycount +1;
+        		  $("#travel").val('Y');
+      		}else{
+      			Hobbycount = Hobbycount -1;
+      			$("#travel").val('N');
+      		}  
+    	  });
+    	  
+			
+    	    	  
+      });
+
+/*       $(function(){
+    	  
+    	  $('#memberjoinForm').submit(function() {
+
+
+   	     	
+    	    });
+    	  
+    	  
+      }); */
+      
+      
+      // 버튼 minsertbtn gkatn
+      function abc(){
+			 				if (imgtitle == false) {
+								alert("첫 사진 확인 해주세요");
+								return false;
+							}
+							if (imgsub == false) {
+								alert("두번째 사진 확인 해주세요");
+								return false;
+							}
+							if (imgsp == false) {
+								alert("세번째 사진 확인");
+								return false;
+							}
+							 
+							 alert("회원가입 완료");
+							$("#memberjoinForm").submit();
+														
+		};
+      
+
+						</script>	
 	</div>
 				
 		<div class="btn_scroll">

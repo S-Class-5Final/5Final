@@ -35,5 +35,20 @@ public class MemberServiceImpl implements MemberService{
 		public Member loginMember(Member m) {
 			return mDao.loginMember(m);
 		}
+
+		@Override
+		public int minsertIdCheck(String id) {
+			return mDao.minsertIdCheck(id);
+		}
+
+		@Override
+		public int minsertNickCheck(String user_nick) {
+			return mDao.minsertNickCheck(user_nick);
+		}
+
+		@Override
+		public int mUpdatePwd(Member m) {
+			return mDao.mUpdatePwd(m);
+		}
 		
 }

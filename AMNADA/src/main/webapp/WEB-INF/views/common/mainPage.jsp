@@ -119,7 +119,7 @@ display: none;
 							
 							
 							<div id="loginview">
-							<form action="mlogin.do" method="post">
+							<form action="mlogin.do" method="post" id ="loginviewForm">
 							<div class="textbox" id="divId">
 								<input type="text" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
 							</div>
@@ -130,7 +130,7 @@ display: none;
 							<br>
 							<br>
 							<div class="textbox" id="loginbtn">
-							<button type="submit">Login</button>
+							<button type="button" onclick = "loginajax()">Login</button>
 							</div>
 							</form>
 							<br>
@@ -302,6 +302,12 @@ display: none;
 		                modal.style.display = "none";
 		            }
 		        } */
+		        
+		        //로그인 처리
+		        function loginajax(){
+		        	ajax()
+		        	
+		        }
 		        
 		         $(function(LoadImg){
    					$("#fileArea").hide(); 

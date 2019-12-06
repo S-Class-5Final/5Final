@@ -40,6 +40,7 @@
 	<id property="user_id" column="USER_ID"/>
 	<result property="originalFileName" column="ORIGINALFILENAME"/>
 	<result property="renameFileName" column="RENAMEFILENAME"/>
+	<result property="img_count" column="IMG_COUNT"/>
 	<result property="update_date" column="UPDATE_DATE"/>
 	<result property="status" column="STATUS"/>
 	</resultMap>
@@ -59,7 +60,7 @@
 	<!-- 사진등록 -->
 	<insert id="insertMemberImg" parameterType="MemberImg">
 	INSERT INTO MEMBERIMG
-		VALUES(#{user_id}, #{originalFileName}, #{renameFileName}, SYSDATE, 'Y')
+		VALUES(#{user_id}, #{originalFileName}, #{renameFileName},#{img_count}, SYSDATE, 'Y')
 	</insert>
 	
 	<!-- 로그인 -->
@@ -67,4 +68,23 @@
 	SELECT * FROM MEMBER
 	WHERE USER_ID=#{user_id} AND STATUS='Y' 
 	</select>
+	
+	<!-- 회원가입 아이디 체크 -->
+	<select id="minsertIdCheck" parameterType="string" resultType="_int">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE USER_ID=#{user_id}	
+	</select>
+	
+	<!-- 회원가입 닉네임 체크 -->
+	<select id="minsertNickCheck" parameterType="string" resultType="_int">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE USER_NICK=#{user_nick}	
+	</select>
+	
+	<!-- 임시 비밀번호 -->
+	<update id="mUpdatePwd" parameterType="Member">
+		UPDATE MEMBER
+		SET USER_PWD=#{user_pwd}
+		WHERE USER_ID=#{user_id} AND STATUS ='Y'
+	</update>
 </mapper>
