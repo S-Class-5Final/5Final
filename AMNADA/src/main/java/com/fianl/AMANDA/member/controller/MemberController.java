@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -209,5 +211,77 @@ public class MemberController {
 		 return "home";
 	 }
 	
+	//카카오 로그인
+	 @RequestMapping("kakaoLogin.do")
+	 public void kakaoLogin(HttpServletResponse response,HttpServletRequest request, String kakaoId, String kakaoEmail) throws JsonIOException, IOException {
+		int data = 0;
+		 Member m = new Member();
+		 m.setKakao(kakaoId);
+		 m.setUser_id(kakaoEmail);
+		 System.out.println(m);
+		 
+		 boolean IDCheck = mService.minsertIdCheck(kakaoEmail) ==0 ? true : false;
+		 //카카오 이메일이 이미 존재 했을때
+		 if(IDCheck == false) {
+			 //카카오 아이디와 카카오 이메일을 비교ㅕ
+			 int kakaoCheck= mService.mloginkakaoCheck(m);
+			 // 비교 값이 0 즉 일치 하지않는다면
+			 if(kakaoCheck == 0) {
+				 // 누군가가 이메일을 등록했으니 이메일 사용 x
+				 data = 0;
+				 new Gson().toJson(data,response.getWriter());
+			 }else {
+				 //일치한다면 로그인 성공
+				 data = 1;
+				 Member loginUser = mService.loginMember(m);
+				 HttpSession session = request.getSession();
+				 session.setAttribute("loginUser", loginUser);
+				 new Gson().toJson(data,response.getWriter());	 
+			 }	 
+		}else {//카카오 이메일가 존재 하지않을때
+			//카카오 ID를 체크 (이미 누군가가 카카오 ID로 회원가입을 했을시를 대비)
+			int kakaoIdCheck = mService.mloginkakaoIdCheck(m);
+			if(kakaoIdCheck == 0) {//카카오 ID도 없을시
+				//회원가입 실시
+				data = 2;
+				new Gson().toJson(data,response.getWriter());
+			}else {
+				//이미 가입한 카카오 아이디가 있음 을 넘김;
+				data = 3;
+				new Gson().toJson(data, response.getWriter());
+			}
+		
+		}
+		 
+		 System.out.println(IDCheck);
+		 
+		 /*
+		 int kakaoCheck = mService.mloginkakaoCheck(m);
+		 if(kakaoCheck==0) {
+			 data = 5;
+			 new Gson().toJson(data, response.getWriter());
+		 }
+		 
+		 */
+		 
+		 /*
+		 * int data = 0; boolean IDCheck = mService.minsertIdCheck(kakaoId) ==0 ? true :
+		 * false;
+		 */
+		/* if(IDCheck == false) {
+			 data = 0;
+				new Gson().toJson(data, response.getWriter());
+				if (bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
+					data = 2;
+					new Gson().toJson(data, response.getWriter());
+				} else {
+					data = 1;
+					new Gson().toJson(data, response.getWriter());
+				}
+			}else {
+				data = 0;
+				new Gson().toJson(data,response.getWriter());
+			}*/
+	 }
 	
 }

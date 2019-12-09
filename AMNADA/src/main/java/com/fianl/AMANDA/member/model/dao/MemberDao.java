@@ -46,4 +46,14 @@ public class MemberDao {
 		public int mUpdatePwd(Member m) {
 			return sqlSession.update("MemberMapper.mUpdatePwd",m);
 		}
+
+		public int mloginkakaoCheck(Member m) {
+			return sqlSession.selectOne("MemberMapper.mloginkakaoCheck",m);
+		}
+
+		public int mloginkakaoIdCheck(Member m) {
+			return sqlSession.selectOne("MemberMapper.mloginkakaoIdCheck",m);
+		}
+
+
 }

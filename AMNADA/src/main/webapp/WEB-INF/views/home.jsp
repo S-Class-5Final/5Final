@@ -17,6 +17,7 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <!-- 이메일 js -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <style>
 .tImg {
 	margin-left: 400px;
@@ -136,7 +137,10 @@ display:none;
 						<br>
 						<br>
 						<div class="textbox" id="loginbtn">
-							<button type="button" onclick="loginCheck()">Login</button>
+							<button type="button" onclick="loginCheck()">Login</button><br>
+							<br>
+							<a id="kakao-login-btn"></a><br>
+							<button type="button" id="kakao-logout" onclick="kakaologout()">ㅎㅎㅎ</button>
 						</div>
 					</form>
 						<br>
@@ -165,12 +169,13 @@ display:none;
 							<option value="naver.com">naver.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="gmail.com">gmail.com</option>
-							<option value="nate.com">nate.com</option>
+						 	<option value="nate.com">nate.com</option> 
 							<option value="1">직접입력</option>
 						</select> &nbsp;&nbsp;
 						<input type="text" name="user_email" id = "user_email" disabled> <br>
 						<div id="checkIdtext">아이디를 입력 해주세요</div>
 						</div><br>
+						<input type= "hidden" name="kakao" id = "kakao"> 
 						<div id="checkPwd">
 						패스워드(PWD) : <input type = "password" name="user_pwd" id="user_pwd">&nbsp;&nbsp;
 						패스워드 확인(PWD) : <input type = "password" name = "user_pwdC" id="user_pwdC"><br>
@@ -250,6 +255,103 @@ display:none;
 			</div>
 		</div>
 						<script>
+//카카오
+$(function(){
+	Kakao.init('2258d057a7a976d9f07e9e4ad2af57fe');
+    // 카카오 로그인 버튼을 생성합니다.
+
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      lang : 'kr',
+      size : 'small',
+      success: function(authObj) {
+    	  Kakao.API.request({
+    	         url: '/v2/user/me',
+    	         success: function(res) {
+    	        	 var kakaoid = res['id'];
+    	        	 var nick = res['properties']['nickname'];
+    	        	var kakaoEmail = res['kakao_account']['email'];
+    	        	// console.log(JSon.stringify(res.profile));
+    	        	console.log(kakaoid);
+    	        	console.log(nick);
+    	        	console.log(kakaoEmail);
+    	        	 console.log(JSON.stringify(res.id));
+    	        	 //console.log(JSON.stringify(res.profile));
+  	       	  		//console.log(JSON.stringify(res.account_email));        	 
+     	        	 $.ajax({
+    	                 url:"kakaoLogin.do",
+    	                 type:"post",
+    	                 data:{
+    	                	 kakaoId:kakaoid,
+    	                	 kakaoEmail:kakaoEmail
+    	                	 },
+    	                 success:function(data){
+							switch (data) {
+ 							case '0':
+								alert("고객님의 카카오톡 E-mail을 누군가가 사용중입니다. 새로 이메일을 만들어 주세요");
+								insertmemberview.onclick();
+								$("#kakao").val(kakaoid);
+								alert(kakaoid);
+								break; 
+							case '1':
+								alert("로그인 완료");
+								location.href="home.do";
+								break;
+							case '2':
+								alert("회원가입 시작 합니다.");
+								alert(kakao);
+								insertmemberview.onclick();
+								var kakaoemail = kakaoEmail.split('@');
+								$("#user_id").val(kakaoemail[0]);
+								var size = $("#email option").length;
+ 								for( i=0 ; i <size;i++){
+									if(kakaoemail[1] ==$("#email option:eq("+i+")").val())
+										{
+										$("#email option:eq("+i+")").attr("selected","selected");
+										$("#user_email").val(kakaoemail[1]);
+						            	$("#checkId").css('background','rgb(0,255,0,0.4)');
+						            	$("#checkIdtext").html('가입 가능한 아이디 입니다.');
+										idUsable = true;
+										$("#user_pwd").focus();
+										}
+									else{
+										$("#email option:eq(4)").attr("selected","selected");
+							            $("#user_email").val(""); // 값 초기화
+										$("#user_email").val(kakaoemail[1]);
+						            	$("#checkId").css('background','rgb(0,255,0,0.4)');
+						            	$("#checkIdtext").html('가입 가능한 아이디 입니다.');
+						            	$("#user_pwd").focus();
+										idUsable = true;
+									}
+								} 
+								$("#kakao").val(kakaoid);									
+								
+								break;
+							case '3':
+								alert("카카오 ID를 만드신 내역이 나옵니다. ID를 찾아주세요");
+								break;
+							}
+    	                 },
+    	                 error:function(data){
+    	                    console.log("서버 통신 안됨");
+    	                 }
+    	              }); 
+    	  
+    	         }
+    	  
+    	         })
+      },
+      fail: function(err) {
+		alert("에러");
+      }
+    });
+    
+});
+
+function kakaologout(){
+	Kakao.Auth.logout();
+	alert("로그아웃");
+}
 
 
 
@@ -300,12 +402,13 @@ display:none;
 		        var imgcount = 0;
 		        var Hobbycount = 0;
 		        
+		        //로그인 버튼
 		        myimg.onclick = function() {
 		            modal.style.display = "block";
 		            loginview.style.display = "block";
 		        	infoView.style.display = "none";
 		        }
-		        
+		        //회원가입 시작 버튼
 		        insertmemberview.onclick = function(){
 		        	loginview.style.display = "none";
 		        	infoView.style.display = "block";
@@ -313,7 +416,7 @@ display:none;
 		        	infoView2.style.display = "none";
 		        	infoView3.style.display = "none";
 		        }
-		        
+		        //회원가입 첫페이지 유효성 검사 및 두번째 페이지로 넘어가는 버튼
 		        nextpage1.onclick=function(){
 		        	if(idUsable ==true && pwdUsable ==true && nickUsable ==true && phoneUsable ==true){
 		        	infoView1.style.display = "none";
@@ -345,12 +448,13 @@ display:none;
 						}
 		        	}
 		        } 
+		        //회원가입 2번째 화면에서 첫번째로 이동하는 이전 버튼
 		        inforbtn.onclick=function(){
 		        	infoView1.style.display = "block";
 		        	infoView2.style.display = "none";
 		        	infoView3.style.display = "none";
 		        }
-		        
+		        //회원가입 2번째 페이지에서 3번째 페이지로 이동 하는 버튼 및 유효성 검사
 		        lastpage.onclick=function(){
 		        	if(phoneUsable ==true && heightUsable == true && ageUsable==true && addressUsable==true &&
 		        			Hobbycount>=3)
@@ -386,12 +490,13 @@ display:none;
 						}
 		        	}
 		        }
-		        
+		        //회원가입 마지막 페이지에서 2번째 페이지로 이동하는 버튼 
 		        nextpage.onclick=function(){
 		        	infoView1.style.display = "none";
 		        	infoView2.style.display = "block";
 		        	infoView3.style.display = "none";
 		        }
+		        //비밀번호 찾기
 		        pwdCheck.onclick=function(){
 		        	loginview.style.display = "none";
 		        	pwdCheckView.style.display = "block";

@@ -87,4 +87,16 @@
 		SET USER_PWD=#{user_pwd}
 		WHERE USER_ID=#{user_id} AND STATUS ='Y'
 	</update>
+	
+	<!-- 카카오 로그인 -->
+	<select id="mloginkakaoCheck" parameterType="Member" resultType="_int">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE USER_ID=#{user_id} AND KAKAO=#{kakao} AND STATUS='Y'
+	</select>
+	
+	<!-- 카카오 아이디 비교 -->
+	<select id="mloginkakaoIdCheck" parameterType="Member" resultType="_int">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE KAKAO=#{kakao} AND STATUS='Y'
+	</select>
 </mapper>

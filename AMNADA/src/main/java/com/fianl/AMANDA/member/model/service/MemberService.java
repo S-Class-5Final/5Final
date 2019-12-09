@@ -22,4 +22,12 @@ public interface MemberService {
 	int minsertNickCheck(String user_nick);
 
 	int mUpdatePwd(Member m);
+
+	//카카오 아이디와 이메일 비교
+	int mloginkakaoCheck(Member m);
+	
+	//카카오 아이디만 비교
+	int mloginkakaoIdCheck(Member m);
+
+
 }
