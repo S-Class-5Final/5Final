@@ -92,6 +92,207 @@ display: none;
 display:none;
 
 }
+
+/* 메인호버기능 */
+.sm-link{
+    --uismLinkDisplay: var(--smLinkDisplay, inline-flex);   
+    --uismLinkTextColor: var(--smLinkTextColor);
+    --uismLinkTextColorHover: var(--smLinkTextColorHover);  
+    
+    display: var(--uismLinkDisplay);
+    color: var(--uismLinkTextColor);
+    position: relative;
+    overflow: hidden;
+}
+
+/* sm-link_padding-all */ 
+
+.sm-link_padding-all{
+    --uismLinkLineWeight: var(--smLinkLineWeight, 2px);
+    --uismLinkLineColor: var(--smLinkLineColor, #000);
+    --uismLinkPadding: var(--smLinkPadding, 5px);
+    
+    padding: var(--uismLinkPadding);
+}
+
+.sm-link_padding-all::before, 
+.sm-link_padding-all::after{
+  width: 100%;
+  height: var(--uismLinkLineWeight);
+  left: 0;
+}
+
+.sm-link_padding-all::before{
+  top: 0;
+}
+
+.sm-link_padding-all::after{
+  bottom: 0;
+}
+
+.sm-link_padding-all .sm-link__label::before,
+.sm-link_padding-all .sm-link__label::after{
+  width: var(--uismLinkLineWeight);
+  height: 100%;
+  top: 0;
+}
+
+.sm-link_padding-all .sm-link__label::before{
+  left: 0;
+}
+
+.sm-link_padding-all .sm-link__label::after{
+  right: 0;
+}
+
+.sm-link_padding-all::before,
+.sm-link_padding-all::after,
+.sm-link_padding-all .sm-link__label::before,
+.sm-link_padding-all .sm-link__label::after{
+  content: "";     
+    background-color: var(--uismLinkLineColor);
+  position: absolute; 
+    opacity: 0;
+    
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+}
+
+.sm-link_padding-all:hover::before,
+.sm-link_padding-all:hover::after,
+.sm-link_padding-all:hover .sm-link__label::before,
+.sm-link_padding-all:hover .sm-link__label::after{
+    opacity: 1;
+}
+
+/* sm-link_padding-bottom */ 
+
+.sm-link_padding-bottom{
+    --uismLinkLineWeight: var(--smLinkLineWeight, 2px);
+    --uismLinkLineColor: var(--smLinkLineColor, #000);  
+    
+    padding-bottom: var(--uismLinkLineWeight);  
+    position: relative;
+}
+
+.sm-link_padding-bottom::after{
+  content: "";
+  width: 100%;
+  height: var(--uismLinkLineWeight);
+    background-color: var(--uismLinkLineColor);
+    
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* sm-link_bg */ 
+
+.sm-link_bg {
+    --uismLinkLineColor: var(--smLinkLineColor, #000);  
+    --uismLinkTextColorHover: var(--smLinkTextColorHover, #fff);    
+    --uismLinkPadding: var(--smLinkPadding, 5px);
+    
+    padding: var(--uismLinkPadding);
+    transition: color .3s ease-out;
+}
+
+.sm-link_bg::before, 
+.sm-link_bg::after{
+  content: "";
+    background-color: var(--uismLinkLineColor); 
+  opacity: 0;
+  position: absolute;
+    
+    transition: transform .2s ease-out, opacity .2s ease-out .03s;
+}
+
+.sm-link_bg .sm-link__label{
+  position: relative;
+  z-index: 2;
+}
+
+.sm-link_bg:hover::before, 
+.sm-link_bg:hover::after{
+  opacity: 1;
+    transition-duration: .35s, .35s;
+    transition-delay: 0s, 0s;
+}
+
+.sm-link_bg:hover{
+    color: var(--uismLinkTextColorHover);
+}
+
+/* sm-link_text */ 
+
+.sm-link_text::before{
+  content: attr(data-sm-link-text);
+    color: var(--uismLinkTextColorHover);
+  position: absolute;
+}
+
+.sm-link_text::before, 
+.sm-link_text .sm-link__label{
+  transition-property: transform;
+    transition-timing-function: cubic-bezier(.86, .6, .08, 1.01); 
+    transition-duration: .3s;
+}
+
+.sm-link_text:hover::before,
+.sm-link_text:hover .sm-link__label{
+    transition-duration: .4s;
+}
+
+/* effect 1 */
+
+.sm-link1::before{
+  transform: translate3d(-105%, 0, 0);
+}
+
+.sm-link1::after{
+  transform: translate3d(105%, 0, 0);
+}
+
+.sm-link1 .sm-link__label::before{
+  transform: translate3d(0%, -100%, 0);
+}
+
+.sm-link1 .sm-link__label::after{
+  transform: translate3d(0%, 100%, 0);
+}
+
+.sm-link1::before,
+.sm-link1::after,
+.sm-link1 .sm-link__label::before,
+.sm-link1 .sm-link__label::after{
+    transition-timing-function: ease-out;
+    transition-duration: .2s, .15s;
+    transition-delay: 0s, .15s;
+}
+
+.sm-link1:hover::before,
+.sm-link1:hover::after,
+.sm-link1:hover .sm-link__label::before,
+.sm-link1:hover .sm-link__label::after{
+  transform: translate3d(0, 0, 0);
+    opacity: 1;
+    
+    transition-duration: .25s;
+    transition-delay: 0s;
+}
+
+.sm-link{
+	--smLinkPadding: 10px 15px;
+	--smLinkLineWeight: 5px;
+	--smLinkLineColor: #ffffff;
+	--smLinkTextColor: #243aab;
+	--smLinkTextColorHover: #1b255a;
+}
+
+.sm-link_bg{
+	--smLinkTextColorHover: #fff;
+}
+/*  */
 </style>
 </head>
 <body>
@@ -114,9 +315,10 @@ display:none;
 		</div>
 		
 		<div class="content">
-			<div class="timg">					
-				<img src="resources/images/mainImg.png" id = "myimg">
+			<div class="timg sm-link__label sm-link sm-link_padding-all sm-link1">			
+				<span class="sm-link__label"><img src="resources/images/mainImg.png" id = "myimg"></span>
 			</div>
+			
 	<!-- 모달창 연습 -->
 			<div id="myModal" class="modal">
 		<!-- Modal content -->
