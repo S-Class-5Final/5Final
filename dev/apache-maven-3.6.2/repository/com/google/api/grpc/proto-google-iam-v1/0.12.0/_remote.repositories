@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 10 18:13:55 KST 2019
+proto-google-iam-v1-0.12.0-sources.jar>central=
+proto-google-iam-v1-0.12.0.jar>central=
+proto-google-iam-v1-0.12.0.pom>central=

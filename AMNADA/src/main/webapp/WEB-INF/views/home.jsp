@@ -293,6 +293,14 @@ display:none;
 	--smLinkTextColorHover: #fff;
 }
 /*  */
+
+
+/* 사진 */
+
+.img_wrap img{
+width: 100%;
+height: 100%;
+}
 </style>
 </head>
 <body>
@@ -342,7 +350,10 @@ display:none;
 							<button type="button" onclick="loginCheck()">Login</button><br>
 							<br>
 							<a id="kakao-login-btn"></a><br>
-							<button type="button" id="kakao-logout" onclick="kakaologout()">ㅎㅎㅎ</button>
+							<button type="button" id="kakao-logout" onclick="kakaologout()">ㅎㅎㅎ</button><br>
+							<form id = "file_form" method="post" enctype="multipart/form-data" action ="">
+							<input type = "file" id="imgtest" multuple="multuple" name="imgtest" onchange ="test10()"><br>
+							</form>	
 						</div>
 					</form>
 						<br>
@@ -457,6 +468,8 @@ display:none;
 			</div>
 		</div>
 						<script>
+					
+
 //카카오
 $(function(){
 	Kakao.init('2258d057a7a976d9f07e9e4ad2af57fe');
@@ -548,7 +561,65 @@ $(function(){
       }
     });
     
+    
+
 });
+ function test10(){ 
+	var formData = new FormData();
+	formData.append("imgtest",$("#imgtest")[0].files[0]);
+	
+	$.ajax({
+		url: "imgCheckTest.do",
+		data : formData,
+		processData:false,
+		contentType:false,
+		type:'POST',
+		dataType:'JSON',
+		success: function(data){
+			var jsonObj = JSON.parse(data);
+			var faceCount = jsonObj.info.faceCount;
+			alert(faceCount);
+			/* var landmark = jsonObj.faces[0].landmark; */
+			if(faceCount == '0' ){
+				alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+			}else{
+				if(jsonObj.faces[0].landmark == null){
+					alert("눈 코 입이 제대로 보이질 않아요 ");
+				}else{
+					alert("사람임");
+				}	
+			}
+			
+			
+/* 			var w = jsonObj.info.size.width;
+			alert(w);
+			console.log(jsonObj);
+			console.log(jsonObj.faces[0].landmark);
+			console.log(w);
+ */
+		}
+	});
+	
+ 	/* var imgtest = $("#imgtest").val();
+	var test2 = $("#imgtest").attr('value');
+ 	alert(test2);
+ 	 */
+ 	/* alert(imgtest);
+ 	$.ajax({
+		  url:"faceImgCheck.do",
+  	data:{
+	  	imgtest:test2
+	  	},
+  success:function(msg){	
+  },
+  error:function(request, status, errorData){
+		alert("error code: " + request.status + "\n"
+				+"message: " + request.responseText
+				+"error: " + errorData);
+	}
+});   */
+ } 
+ 
 
 function kakaologout(){
 	Kakao.Auth.logout();
@@ -848,7 +919,6 @@ function kakaologout(){
 								case 1:
 									$("#firstImg").attr("src", e.target.result);
 									imgtitle = true;
-									alert(imgtitle);
 									break;
 								case 2:
 									$("#secondImg").attr("src", e.target.result);
@@ -1314,17 +1384,18 @@ $(function() {
                         <div class="text_wrap">
                             <p class="title_st1 eng">당신의 연예는</p>
                                  <p class="f_logo">
-                                <img src="resources/face/G.JPG" /></p> 
+                               <img src="resources/images/.JPG" /></p> 
                                 <p class="f_name">아</p>
                                 <p class="f_description">아무나</p>
                         </div>
                         <div class="img_wrap">
-                        <img src="resources/face/G3.JPG" /></div>
+                        <img src="resources/images/준하1.jpg" />
+                        </div>
                         <div class="slider_ar">
                             <div class="count count2">
                                 <span class="idx">01</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>
@@ -1334,16 +1405,20 @@ $(function() {
                     <div class="content">
                         <div class="text_wrap">
                             <p class="title_st1 eng">언제 어디서 든지 </p>
-                                <!-- <p class="f_logo"><img src="/public/upload/20190403/e09687523ec0d37ee5e86882979561aa.png" /></p> -->
+                                 <p class="f_logo">
+                                 <img src="resources/images/진형.JPG" />
+                                </p>
                                 <p class="f_name">만</p>
                                 <p class="f_description">만난</p>
                         </div>
-                        <div class="img_wrap"></div>
+                        <div class="img_wrap">
+                        <img src="resources/images/진형.jpg" />
+                        </div>
                         <div class="slider_ar">
                             <div class="count count2">
                                 <span class="idx">02</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>
@@ -1353,20 +1428,71 @@ $(function() {
                     <div class="content">
                         <div class="text_wrap">
                             <p class="title_st1 eng">아만다에서 만나세요</p>
-                                <!-- <p class="f_logo"><img src="/public/upload/20190322/49c3cc4c3f202dab5813136402dc48fe.jpg" /></p> -->
+                                <p class="f_logo">
+                                <img src="resources/images/상훈.JPG" />
+                                </p>
                                 <p class="f_name">다</p>
                                 <p class="f_description">다</p>
                             
                         </div>
                         <div class="img_wrap">
-                        <img src="resources/face/t2.JPG" />
+                        <img src="resources/images/G.jpg" />
+                        </div>
+                        <div class="slider_ar">
+                            <div class="count count2">
+                                <span class="idx">03</span>
+                                <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
+                                <span class="length">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                 <li class="slide4">
+                    <div class="slider_img"></div>
+                    <div class="content">
+                        <div class="text_wrap">
+                            <p class="title_st1 eng">아만다에서 만나세요</p>
+                                <p class="f_logo">
+                                <img src="resources/images/재윤.JPG" />
+                                </p>
+                                <p class="f_name">다</p>
+                                <p class="f_description">다</p>
+                            
+                        </div>
+                        <div class="img_wrap">
+                        <img src="resources/images/상훈.jpg" />
                         </div>
                         <div class="slider_ar">
 
                             <div class="count count2">
-                                <span class="idx">03</span>
+                                <span class="idx">04</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                 <li class="slide5">
+                    <div class="slider_img"></div>
+                    <div class="content">
+                        <div class="text_wrap">
+                            <p class="title_st1 eng">아만다에서 만나세요</p>
+                                <p class="f_logo">
+                                <img src="/public/upload/20190322/49c3cc4c3f202dab5813136402dc48fe.jpg" />
+                                </p>
+                                <p class="f_name">다</p>
+                                <p class="f_description">다</p>
+                            
+                        </div>
+                        <div class="img_wrap">
+                        <img src="resources/images/재윤.jpg" />
+                        </div>
+                        <div class="slider_ar">
+
+                            <div class="count count2">
+                                <span class="idx">05</span>
+                                <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>

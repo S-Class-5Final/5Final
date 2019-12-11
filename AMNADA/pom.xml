@@ -21,7 +21,20 @@
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
 	</repositories>
+	<!-- 구글  -->
 	
+	<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+      <version>1.2.0.RELEASE</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -245,6 +258,40 @@
 		    <artifactId>gson</artifactId>
 		    <version>2.8.5</version>
 		</dependency> 
+		
+		<!-- 구글 얼굴 인식 -->
+	<dependency>
+		<groupId>com.google.apis</groupId>
+		<artifactId>google-api-services-vision</artifactId>
+		<version>v1-rev20190125-1.28.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.api-client</groupId>
+		<artifactId>google-api-client</artifactId>
+		<version>1.28.0</version>
+		<exclusions>
+			<exclusion> <!-- exclude an old version of Guava -->
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava-jdk5</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>25.1-android</version>
+	</dependency>
+	<!-- 구글 -->
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-gcp-starter-vision</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.google.cloud</groupId>
+		<artifactId>google-cloud-storage</artifactId>
+		<version>1.75.0</version>
+	</dependency>
+
 	</dependencies>
     <build>
         <plugins>
@@ -282,6 +329,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 </project>
