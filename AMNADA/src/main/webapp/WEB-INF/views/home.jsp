@@ -44,15 +44,21 @@
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	overflow-y: hidden; /* 스크롤바 없애기 */
+	overflow-x: hidden;
+
 }
 
 /* Modal Content/Box */
 .modal-content {
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgb(255, 255, 255);
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
+
+	border-radius: 15px;
+	
 }
 /* The Close Button */
 .close {
@@ -292,14 +298,109 @@ display:none;
 .sm-link_bg{
 	--smLinkTextColorHover: #fff;
 }
-/*  */
-
+/* 텍스트 박스 */
+.logintable{
+margin: auto;
+}
 
 /* 사진 */
 
 .img_wrap img{
 width: 100%;
 height: 100%;
+}
+
+/* 로그인버튼 */
+.loginbtn{
+	margin:auto;
+  background:#FF6464;
+  color:#fff;
+  border:none;
+  position:relative;
+  width:300px;
+  height: 45px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 6.5px;
+}
+.loginbtn:hover{
+  background:#fff;
+  color:#FF6464;
+}
+.loginbtn:before,.loginbtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #FF6464;
+  transition:400ms ease all;
+}
+.loginbtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.loginbtn:hover:before,.loginbtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+/* 회원가입 및 버튼 css */
+.joinform,
+.joinform::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.joinform {
+margin : auto;
+  background: none;
+  border-radius: 5px;
+  color: black;
+  display: block;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.joinform::before,
+.joinform::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.joinform:hover {
+background:#FF6464;
+  color: #fff;
+  border: 3px solid #FF6464;
+}
+.joinform::after {
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+}
+
+.joinform:hover:after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+/* 텍스트박스 */
+.textboxra{
+border-radius: 6.5px;
 }
 </style>
 </head>
@@ -331,35 +432,64 @@ height: 100%;
 			<div id="myModal" class="modal">
 		<!-- Modal content -->
 				<div class="modal-content">
-					<div>
+					<div class="closebten">
 						<span class="close">&times;</span><br><br><br>
 					</div>
 			
 					<div id="loginview">
 					<form action="mlogin.do" method="post" id="loginviewform">
+					<table class="logintable" >
+						<tr>
+						<td height="70px" >
 						<div class="textbox" id="divId">
-							<input type="text" id ="loginId" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
+							<input type="text" id ="loginId" class ="textboxra" name="loginId" data-rule-required="true" size="46px" placeholder="ex) OOOO@naver.com">
 						</div>
-						<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
 						<div class="textbox" id="divPassword">
-							<input type="password" id="loginPwd" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
+							<input type="password" id="loginPwd" class ="textboxra" name="loginPwd" data-rule-required="true" size="60px" placeholder="비밀번호를 입력하세요">
 						</div> 
 						<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<div class="textbox">
+						<button type="button" class="loginbtn" onclick="loginCheck()">Login</button>
+						</div>
 						<br>
-						<div class="textbox" id="loginbtn">
-							<button type="button" onclick="loginCheck()">Login</button><br>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<div class="textbox">
+						<a id="kakao-login-btn"></a>
+						</div>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<br>
+						<button type = "button" id="insertmemberview" class="joinform" >아이디가 없으신가요?</button>
+						<button type = "button" id="pwdCheck" class="joinform">비밀번호가 기억이 나지 않으세요?</button>
+						</td>
+<!-- 						<td colspan="2">
+						<button type = "button" id="pwdCheck" class="joinform">비밀번호가 기억이 나지 않으세요?</button>
+						</td> -->
+						</tr>
+					</table>
+<!-- 						<div class="textbox" id="loginbtn">
+						
 							<br>
-							<a id="kakao-login-btn"></a><br>
+							<br>
 							<button type="button" id="kakao-logout" onclick="kakaologout()">ㅎㅎㅎ</button><br>
 							<form id = "file_form" method="post" enctype="multipart/form-data" action ="">
 							<input type = "file" id="imgtest" multuple="multuple" name="imgtest" onchange ="test10()"><br>
 							</form>	
-						</div>
+						</div> -->
 					</form>
-						<br>
-						<div class = "textbox" id="loginbtn">
-							<button id="insertmemberview">회원가입</button> / <button type = "button" id="pwdCheck">비밀번호 찾기</button>
-						</div>
 					</div>
 					
 					<div id ="pwdCheckView">
@@ -442,13 +572,13 @@ height: 100%;
 					<div id = "infoView3">
 						<div id="Imglist"> 
 							<div id="first">
-								<img id = "firstImg" width="300" height="300">
+								<img id = "firstImg" src="resources/images/image.png" onerror="this.src='resources/images/image.png'" width="300" height="300">
 							</div>
 							<div id = "second">
-								<img id= "secondImg" width ="300" height = "300">
+								<img id= "secondImg" src="resources/images/image.png" width ="300" height = "300">
 							</div>
 							<div id = "third">
-								<img id= "thirdImg" width ="300" height = "300">
+								<img id= "thirdImg" src="resources/images/image.png" width ="300" height = "300">
 							</div>
 						</div>
 					<button type="button" id="nextpage">이전으로</button><br>
@@ -457,11 +587,13 @@ height: 100%;
 						<button type="button" id="nextpage">이전으로</button><br>
 							<button type="button" id = "minsertbtn">회원 가입완료</button>
 						</div> -->
+						<form id = "file_imgfrom" method="post" enctype="multipart/form-data" action ="">
 						<div id = "fileArea" type ="hidden">
 							<input type = "file" id="thumbnailImg1" multuple="multuple" name="thumbnailImg1" onchange="LoadImg(this,1)">
 							<input type = "file" id="thumbnailImg2" multuple="multuple" name="thumbnailImg2" onchange="LoadImg(this,2)">
 							<input type = "file" id="thumbnailImg3" multuple="multuple" name="thumbnailImg3" onchange="LoadImg(this,3)">
 						</div>
+						</form>
 						</div>
 					</form>
 				</div>
@@ -478,7 +610,7 @@ $(function(){
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       lang : 'kr',
-      size : 'small',
+      size : 'large',
       success: function(authObj) {
     	  Kakao.API.request({
     	         url: '/v2/user/me',
@@ -564,6 +696,7 @@ $(function(){
     
 
 });
+ //얼굴 인식 테스트 코드 
  function test10(){ 
 	var formData = new FormData();
 	formData.append("imgtest",$("#imgtest")[0].files[0]);
@@ -588,36 +721,16 @@ $(function(){
 				}else{
 					alert("사람임");
 				}	
-			}
 			
-			
-/* 			var w = jsonObj.info.size.width;
-			alert(w);
-			console.log(jsonObj);
-			console.log(jsonObj.faces[0].landmark);
-			console.log(w);
- */
+		}
+		},
+		error:function(request, status, errorData){
+			alert("error code: " + request.status + "\n"
+					+"message: " + request.responseText
+					+"error: " + errorData);
 		}
 	});
-	
- 	/* var imgtest = $("#imgtest").val();
-	var test2 = $("#imgtest").attr('value');
- 	alert(test2);
- 	 */
- 	/* alert(imgtest);
- 	$.ajax({
-		  url:"faceImgCheck.do",
-  	data:{
-	  	imgtest:test2
-	  	},
-  success:function(msg){	
-  },
-  error:function(request, status, errorData){
-		alert("error code: " + request.status + "\n"
-				+"message: " + request.responseText
-				+"error: " + errorData);
-	}
-});   */
+
  } 
  
 
@@ -892,7 +1005,7 @@ function kakaologout(){
 			             });
 		        	} 
 		        }
-		        
+		        //div로 이미지 등록 하는 법
 		         $(function(LoadImg){
    					$("#fileArea").hide(); 
    					
@@ -917,16 +1030,115 @@ function kakaologout(){
 							reader.onload = function(e) {
 								switch (num) {
 								case 1:
-									$("#firstImg").attr("src", e.target.result);
-									imgtitle = true;
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg1")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#firstImg").attr("src", "resources/images/image.png");
+												imgtitle = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													$("#firstImg").attr("src", "resources/images/image.png");
+													imgtitle = false;
+												}else{
+													alert("사람임");
+													$("#firstImg").attr("src", e.target.result);
+													imgtitle = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								case 2:
-									$("#secondImg").attr("src", e.target.result);
-									imgsub = true;
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg2")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#secondImg").attr("src", "resources/images/image.png");
+												imgsub = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													$("#secondImg").attr("src", "resources/images/image.png");
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													imgsub = false;
+												}else{
+													alert("사람임");
+													$("#secondImg").attr("src", e.target.result);
+													imgsub = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								case 3:
-									$("#thirdImg").attr("src", e.target.result);
-									imgsp = true;
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg2")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#thirdImg").attr("src", "resources/images/image.png");
+												imgsp = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													$("#thirdImg").attr("src", "resources/images/image.png");
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													imgsp = false;
+												}else{
+													alert("사람임");
+													$("#thirdImg").attr("src", e.target.result);
+													imgsp = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								}
 							}
