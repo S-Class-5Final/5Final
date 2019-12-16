@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Dec 04 01:28:03 KST 2019
+velocity-tools-2.0.jar>central=
+velocity-tools-2.0-javadoc.jar>central=
+velocity-tools-2.0.pom>central=

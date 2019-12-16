@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Dec 04 01:26:40 KST 2019
+maven-javadoc-plugin-2.10.3-sources.jar>central=
+maven-javadoc-plugin-2.10.3.jar>central=
+maven-javadoc-plugin-2.10.3.pom>central=

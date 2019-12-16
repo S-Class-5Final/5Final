@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Dec 04 01:27:31 KST 2019
+antlr-2.7.2-sources.jar>central=
+antlr-2.7.2.jar>central=
+antlr-2.7.2.pom>central=

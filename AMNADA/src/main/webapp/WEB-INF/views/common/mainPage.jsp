@@ -20,11 +20,9 @@
 	margin-left: 400px;
 	margin-top: 300px;
 }
-
 #service {
 	background: #e793f0;
 }
-
 #interview {
 	background: blue;
 }
@@ -41,7 +39,6 @@
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
-
 /* Modal Content/Box */
 .modal-content {
 	background-color: rgba(255, 255, 255, 0.9);
@@ -57,21 +54,17 @@
 	font-size: 28px;
 	font-weight: bold;
 }
-
 .close:hover, .close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
 }
-
 .textbox {
 	text-align: center;
 }
-
 #mainhr {
 	border: 4px solid blue;
 }
-
 #infoView {
 display: none;
 }
@@ -119,7 +112,7 @@ display: none;
 							
 							
 							<div id="loginview">
-							<form action="mlogin.do" method="post">
+							<form action="mlogin.do" method="post" id ="loginviewForm">
 							<div class="textbox" id="divId">
 								<input type="text" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
 							</div>
@@ -130,7 +123,7 @@ display: none;
 							<br>
 							<br>
 							<div class="textbox" id="loginbtn">
-							<button type="submit">Login</button>
+							<button type="button" onclick = "loginajax()">Login</button>
 							</div>
 							</form>
 							<br>
@@ -303,6 +296,12 @@ display: none;
 		            }
 		        } */
 		        
+		        //로그인 처리
+		        function loginajax(){
+		        	ajax()
+		        	
+		        }
+		        
 		         $(function(LoadImg){
    					$("#fileArea").hide(); 
    					
@@ -323,13 +322,11 @@ display: none;
 		         
   
    					// 이미지 업로드 
-
 					function LoadImg(value, num) {
 						if (value.files[0] != undefined) {
 							// value는 함수를 발동시킨 객체(file타입 input태그)이고
 							// value.files[0]은 input태그로 파일을 선택 했으면 undefined가 아니고 선택 안했으면 undefined다.
 							var reader = new FileReader();
-
 							reader.onload = function(e) {
 								switch (num) {
 								case 1:
@@ -342,19 +339,16 @@ display: none;
 									$("#thirdImg").attr("src", e.target.result);
 									break;
 								}
-
 							}
 							reader.readAsDataURL(value.files[0]);
 						}
 					}
-
 				$(function() {
 						$("#Imglist").sortable(); // id가 "sortable" 인 태그의 내부에 포함된 태그를 사용해서 드래그 가능한 리스트를 만듦
 						$("#Imglist").disableSelection(); // 상자 선택만 하도록 함 텍스트를 선택 취소 할 수있게하려는 경우 유용합니다.
 						$("#Imglist").suffer();
 					});
 				
-
 				</script>
 				<!-- 끝 -->
 				
@@ -724,15 +718,12 @@ display: none;
             scrollNav();
         });
     });
-
     function scrollNav() {
-
         win_top = $(window).scrollTop();
         part1 = $("#visual").offset().top;
         part2 = $("#service").offset().top;
         part3 = $("#interview").offset().top;
         part4 = $("#notice").offset().top;
-
         if (win_top < part2) {
             $(".nav li").removeClass('active');
             $(".nav1").addClass('active');

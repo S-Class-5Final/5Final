@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paymentMapper">
+	<resultMap type="Member" id="MemberResultMap">
+	<id property="u_mid" column="U_MID"/>
+	<result property="user_id" column="USER_ID"/>
+	<result property="user_pwd" column="USER_PWD"/>
+	<result property="user_nick" column="USER_NICK"/>
+	<result property="grade" column="GRADE"/>
+	<result property="gender" column="GENDER"/>
+	<result property="phone" column="PHONE"/>
+	<result property="height" column="HEIGHT"/>
+	<result property="age" column="AGE"/>
+	<result property="address" column="ADDRESS"/>
+	<result property="user_into" column="USER_INTO"/>
+	<result property="gay" column="GAY"/>
+	<result property="r_count" column="R_COUNT"/>
+	<result property="updata_date" column="UPDATA_DATE"/>
+	<result property="status" column="STATUS"/>
+	<result property="pay_status" column="PAY_STATUS"/>
+	<result property="kakao" column="KAKAO"/>
+	</resultMap>
+
+	<insert id="insertPay" parameterType="Payment">
+  		INSERT INTO PAYMENT VALUES 
+  		(#{goyou}, #{uMid}, SYSDATE, #{userId}, #{payDay})
+	</insert>
+	<update id="updatePay" parameterType="Payment">
+		UPDATE MEMBER
+		SET PAY_STATUS='Y', GRADE = 2
+		WHERE USER_ID=#{userId}
+	</update>
+	
+	<select id="payCheck" parameterType="Member" resultMap="MemberResultMap">
+		SELECT PAY_STATUS
+		FROM MEMBER
+		WHERE USER_ID = #{user_id}
+	</select>
+</mapper>

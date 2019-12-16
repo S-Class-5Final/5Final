@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="likeMapper">
+
+	<resultMap type="Member" id="MemberResultMap">
+		<id property="u_mid" column="U_MID"/>
+		<result property="user_id" column="USER_ID"/>
+		<result property="user_pwd" column="USER_PWD"/>
+		<result property="user_nick" column="USER_NICK"/>
+		<result property="grade" column="GRADE"/>
+		<result property="gender" column="GENDER"/>
+		<result property="phone" column="PHONE"/>
+		<result property="height" column="HEIGHT"/>
+		<result property="age" column="AGE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="user_into" column="USER_INTO"/>
+		<result property="gay" column="GAY"/>
+		<result property="r_count" column="R_COUNT"/>
+		<result property="updata_date" column="UPDATA_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="pay_status" column="PAY_STATUS"/>
+		<result property="kakao" column="KAKAO"/>
+	</resultMap>
+	
+	<resultMap type="MemberImg" id="MemberImgResultMap">
+		<id property="user_id" column="USER_ID"/>
+		<result property="originalFileName" column="ORIGINALFILENAME"/>
+		<result property="renameFileName" column="RENAMEFILENAME"/>
+		<result property="img_count" column="IMG_COUNT"/>
+		<result property="update_date" column="UPDATE_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+
+	<resultMap type="Like" id="LikeResultMap">
+		<id property="likeNo" column="LIKENO"/>
+		<result property="uMid" column="U_MID"/>
+		<result property="sender" column="SENDER"/>
+		<result property="receiver" column="RECEIVER"/>
+		<result property="likeStatus" column="LIKESTATUS"/>
+		<result property="likeSusin" column="LIKESUSIN"/>
+	</resultMap>
+	
+	
+	<select id="selectSender" parameterType="Member" resultMap="MemberResultMap" >
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID IN (SELECT SENDER
+                          FROM MLIKE
+                          WHERE RECEIVER = #{user_id} AND LIKESTATUS = 'Y')
+	</select>
+	
+	<select id="selectReceiver" parameterType="Member" resultMap="MemberResultMap" >
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID IN (SELECT RECEIVER
+                          FROM MLIKE
+                          WHERE SENDER = #{user_id} AND LIKESTATUS = 'Y')
+	</select>
+	
+	<select id="selectSenderImg" parameterType="MemberImg" resultMap="MemberImgResultMap">
+		SELECT *
+		FROM MEMBERIMG
+		WHERE USER_ID IN (SELECT SENDER
+                          FROM MLIKE
+                          WHERE RECEIVER = #{user_id} AND LIKESTATUS = 'Y')
+        AND IMG_COUNT = 0
+	</select>
+	
+	<select id="selectReceiverImg" parameterType="MemberImg" resultMap="MemberImgResultMap">
+		SELECT *
+		FROM MEMBERIMG
+		WHERE USER_ID IN (SELECT RECEIVER
+                          FROM MLIKE
+                          WHERE SENDER = #{user_id} AND LIKESTATUS = 'Y') 
+       	AND IMG_COUNT =0
+	</select>
+	
+	<insert id="insertLike" parameterType="Like">
+		INSERT INTO MLIKE VALUES 
+		(SEQ_LIKENO.NEXTVAL, #{uMid}, #{sender}, #{receiver}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="updateLike" parameterType="Like">
+		UPDATE MLIKE
+	  	SET LIKESTATUS = 'N'
+	  	WHERE SENDER =#{sender} AND RECEIVER = #{receiver}
+	</update>
+	
+	<!-- 좋아요 여부  -->
+	<select id="selectLike" parameterType="Like" resultType="_int">
+		SELECT count(*)
+		FROM MLIKE
+		WHERE SENDER = #{sender} AND RECEIVER = #{receiver} AND LIKESTATUS ='Y'
+	</select>
+	
+	<select id="selectMatchList" parameterType="Member" resultMap="MemberResultMap">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID IN (SELECT A.RECEIVER
+                    FROM MLIKE A, MLIKE B
+                    WHERE A.SENDER = B.RECEIVER AND B.SENDER = A.RECEIVER 
+                    AND A.SENDER = #{user_id} AND B.RECEIVER = #{user_id}
+                    AND A.LIKESTATUS ='Y' AND B.LIKESTATUS='Y')
+              ORDER BY U_MID ASC
+	</select>
+	
+	<select id="selectMatchImg" parameterType="MemberImg" resultMap="MemberImgResultMap">
+		SELECT *
+		FROM MEMBERIMG
+		WHERE USER_ID IN (SELECT A.RECEIVER
+                    FROM MLIKE A, MLIKE B
+                    WHERE A.SENDER = B.RECEIVER AND B.SENDER = A.RECEIVER 
+                    AND A.SENDER = #{user_id} AND B.RECEIVER = #{user_id}
+                    AND A.LIKESTATUS ='Y' AND B.LIKESTATUS='Y' AND IMG_COUNT=0)
+	</select>
+
+</mapper>

@@ -1,9 +1,11 @@
 package com.fianl.AMANDA.member.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,8 @@ import com.fianl.AMANDA.member.model.service.MemberService;
 import com.fianl.AMANDA.member.model.vo.Hobby;
 import com.fianl.AMANDA.member.model.vo.Member;
 import com.fianl.AMANDA.member.model.vo.MemberImg;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -33,10 +38,13 @@ public class MemberController {
 	@RequestMapping("minsert.do")
 	public String memberInsert(Member m, Model model, Hobby h ,HttpServletRequest request,
 	@RequestParam("phone1") String p1,@RequestParam("phone2") String p2, @RequestParam("phone3") String p3,
+	@RequestParam("user_email") String user_email,
 	@RequestParam(value="thumbnailImg1",required=false) MultipartFile Img1,
 	@RequestParam(value="thumbnailImg2",required=false) MultipartFile Img2,
 	@RequestParam(value="thumbnailImg3",required=false) MultipartFile Img3) {
 		String phone  = p1+ "-" + p2 + "-" +p3;
+		String user_id = m.getUser_id() + "@" + user_email;
+		m.setUser_id(user_id);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 		m.setUser_pwd(encPwd);
 		m.setPhone(phone);
@@ -63,6 +71,7 @@ public class MemberController {
 				  if(renameFileName != null) { // 파일이 잘 저장된 경우
 				  mImg.setOriginalFileName(Img[i].getOriginalFilename());
 				  mImg.setRenameFileName(renameFileName); 
+				  mImg.setImg_count(i);
 				  }
 				  
 				mImglist[i] = mImg;
@@ -121,16 +130,84 @@ public class MemberController {
 		 * 사용자가 입력한 비밀번호를 비교할 수 있다.
 		 * 당연히 일치하면 로그인 성공!, 실패하면 로그인 실패!
 		 */
-		
+		String msg = "아이디 및 비밀번호 확인해 주세요";
 		Member loginUser = mService.loginMember(m);
 		
-		if(bcryptPasswordEncoder.matches(m.getUser_pwd(),loginUser.getUser_pwd())) {
-			model.addAttribute("loginUser",loginUser);
-		}else {
-			throw new MemberException("로그인 실패");
-		}
-		return "home";
+	
+			if (bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
+				model.addAttribute("loginUser", loginUser);
+			} else {
+				model.addAttribute("msg", msg);
+//				throw new MemberException("로그인 실패");
+			}
+
+		
+		return "common/matching";
 	}
+	
+	//회원가입 아이디 유효성 검사
+	@RequestMapping("minsertIdCheck.do")
+	@ResponseBody
+	public void minsertIdCheck(HttpServletResponse response ,String user_id, String user_email) throws JsonIOException, IOException {
+	String id = null;
+		if(user_email == null) {
+			id= user_id; 
+		}else {
+			id = user_id +"@" + user_email;
+			System.out.println(id);
+		}
 
+		
+		
+		boolean IDCheck = mService.minsertIdCheck(id) ==0 ? true : false;
+		
+		System.out.println(IDCheck);
+		
+		new Gson().toJson(IDCheck,response.getWriter());
+	}
+	
+	//회원가입 닉네임 유효성 검사
+	@RequestMapping("minsertNickCheck.do")
+	public void minsertNickCheck(HttpServletResponse response,String user_nick) throws JsonIOException, IOException {
+		boolean NickCheck = mService.minsertNickCheck(user_nick) == 0 ? true : false;
+		
+		new Gson().toJson(NickCheck,response.getWriter());
+	}
+	
+	//로그인 처리
+	@RequestMapping("mloginCheck.do")
+	public void loginCheck(HttpServletResponse response, String user_id , String user_pwd) throws JsonIOException, IOException {
+		
+		boolean IDCheck = mService.minsertIdCheck(user_id) ==0 ? true : false;
+		int msg = 0;
+		if(IDCheck == false) {
+			Member m = new Member(user_id,user_pwd);
+			Member loginUser = mService.loginMember(m);
+			
+			if (bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
+				msg = 2;
+				new Gson().toJson(msg, response.getWriter());
+			} else {
+				msg = 1;
+				new Gson().toJson(msg, response.getWriter());
+			}
+		}else {
+			msg= 0;
+			new Gson().toJson(msg,response.getWriter());
+		}
+	}
+	//비밀번호 찾기
+	 @RequestMapping("mSerchPwd.do")
+	 public String SerchPwd (Model model,HttpServletRequest request,
+		@RequestParam("serchId") String user_id ,@RequestParam("findPwd") String user_pwd) {
+		 String encPwd = bcryptPasswordEncoder.encode(user_pwd);
+		 Member m = new Member(user_id,encPwd);
+		 
+		 mService.mUpdatePwd(m);
+		 
 
+		 return "home";
+	 }
+	
+	
 }

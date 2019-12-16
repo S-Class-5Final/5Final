@@ -3,9 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -23,6 +26,15 @@
 	
 	<context:component-scan base-package="com.fianl.AMANDA" />
 	
+	<!-- jasonView를 활용할 때 필요한 클래스들에 대한 bean 설정 등록 -->
+   <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
 	
-	
+	<!-- 웹소켓 사용 -->
+    <websocket:handlers>
+        <websocket:mapping path="/websocket/echo.do" handler="myHandler"/>
+    </websocket:handlers>
+    
+    <!-- 웹 소켓 핸들러  -->
+	<beans:bean id="myHandler" class="com.fianl.AMANDA.handler.WebSocketHandler"/>
+
 </beans:beans>

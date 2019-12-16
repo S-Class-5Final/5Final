@@ -34,4 +34,16 @@ public class MemberDao {
 		public Member loginMember(Member m) {
 			return sqlSession.selectOne("MemberMapper.loginMember",m);
 		}
+
+		public int minsertIdCheck(String user_id) {
+			return sqlSession.selectOne("MemberMapper.minsertIdCheck",user_id);
+		}
+
+		public int minsertNickCheck(String user_nick) {
+			return sqlSession.selectOne("MemberMapper.minsertNickCheck",user_nick);
+		}
+
+		public int mUpdatePwd(Member m) {
+			return sqlSession.update("MemberMapper.mUpdatePwd",m);
+		}
 }

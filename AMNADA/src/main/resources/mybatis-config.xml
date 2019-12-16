@@ -10,11 +10,20 @@
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.Hobby" alias="Hobby"/>
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.MemberImg" alias="MemberImg"/>
+		<typeAlias type="com.fianl.AMANDA.Payment.model.vo.Payment" alias="Payment"/>
+		<typeAlias type="com.fianl.AMANDA.Message.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.fianl.AMANDA.match.model.vo.Member" alias="Member2"/>
+		<typeAlias type="com.fianl.AMANDA.match.model.vo.MemberImg" alias="MemberImg2"/>
+		<typeAlias type="com.fianl.AMANDA.Like.model.vo.Like" alias="Like"/>
 	</typeAliases>
 	
 	<!-- sql문들을 지닌 mapper.xml들을 등록 -->
  	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/payment-mapper.xml"/>
+		<mapper resource="mappers/like-mapper.xml"/>
+		<mapper resource="mappers/message-mapper.xml"/>
+		<mapper resource="mappers/match-mapper.xml"/>
 	</mappers>
 	
 	<!-- 우선 member-mapper.xml만 만들고 로그인 부터 하자 -->
