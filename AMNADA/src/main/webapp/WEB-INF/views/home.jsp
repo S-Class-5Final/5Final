@@ -127,6 +127,7 @@
 	top: 0;
 }
 
+
 .sm-link_padding-all::after {
 	bottom: 0;
 }
