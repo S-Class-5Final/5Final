@@ -6,6 +6,7 @@
 <head>
 <title></title>
 
+
     <link type="text/css" href="resources/css/common.css" rel="stylesheet">
     <link type="text/css" href="resources/css/font.css" rel="stylesheet">
     <link type="text/css" href="resources/css/slick.css" rel="stylesheet">
