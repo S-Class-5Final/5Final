@@ -142,15 +142,19 @@ public class MemberController {
 
 
 	@RequestMapping("mlogin.do")
-	public String memberLogin(Model model, @RequestParam("loginId") String user_id,
-			@RequestParam("loginPwd") String user_pwd) {
+	public String memberLogin(HttpServletRequest request,
+							  Model model, 
+			                  @RequestParam("loginId") String user_id,
+							  @RequestParam("loginPwd") String user_pwd) {
+		
 		Member m = new Member(user_id, user_pwd);
-		/*
-		 * matches() 메소드를 통해 우리는 암호화되어 있는 DB값과 사용자가 입력한 비밀번호를 비교할 수 있다. 당연히 일치하면 로그인
-		 * 성공!, 실패하면 로그인 실패!
-		 */
+		
+		HttpSession session = request.getSession();  //
+		
 		String msg = "아이디 및 비밀번호 확인해 주세요";
 		Member loginUser = mService.loginMember(m);
+		
+		session.setAttribute("loginUser2", loginUser);  //
 
 		if (bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
 			model.addAttribute("loginUser", loginUser);
@@ -159,7 +163,7 @@ public class MemberController {
 //				throw new MemberException("로그인 실패");
 		}
 
-		return "home";
+		return "common/matching";
 	}
 
 	// 회원가입 아이디 유효성 검사
