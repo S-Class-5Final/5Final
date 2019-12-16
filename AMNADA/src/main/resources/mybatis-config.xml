@@ -19,6 +19,7 @@
 	
 	<!-- sql문들을 지닌 mapper.xml들을 등록 -->
  	<mappers>
+ 		<!-- member -->
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/payment-mapper.xml"/>
 		<mapper resource="mappers/like-mapper.xml"/>

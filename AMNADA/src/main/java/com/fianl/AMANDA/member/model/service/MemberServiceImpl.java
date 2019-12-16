@@ -50,5 +50,21 @@ public class MemberServiceImpl implements MemberService{
 		public int mUpdatePwd(Member m) {
 			return mDao.mUpdatePwd(m);
 		}
+<<<<<<< HEAD
 		
 }
+=======
+
+		@Override
+		public int mloginkakaoCheck(Member m) {
+			return mDao.mloginkakaoCheck(m);
+		}
+
+		@Override
+		public int mloginkakaoIdCheck(Member m) {
+			return mDao.mloginkakaoIdCheck(m);
+		}
+
+
+}
+>>>>>>> refs/remotes/origin/master

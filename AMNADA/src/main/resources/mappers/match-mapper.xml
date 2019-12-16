@@ -13,7 +13,6 @@
 		<result property="user_into" column="USER_INTO"/>
 		<result property="gay" column="GAY"/>
 		<result property="status" column="STATUS"/>
-		<result property="pay_status" column="PAY_STATUS"/>
 		<result property="kakao" column="KAKAO"/>
 	</resultMap>
 <!-- 	<resultMap type="Member2" id="MemberResultMap">
@@ -56,19 +55,185 @@
 		<result property="renameFileName" column="RENAMEFILENAME"/>
 		<result property="update_date" column="UPDATE_DATE"/>
 		<result property="status" column="STATUS"/>
-		<result property="imgCount" column="IMG_COUNT"/>
 	</resultMap>
-
-
-	<!-- 회원 -->
-	<select id="selectMlist" resultMap="MemberResultMap" resultType="Member2">
+	
+	<!-- 좋아요 매칭 -->
+<!-- 	<resultMap type="Match" id="MatchResultMap">
+		<id property="likeNo" column="LIKENO" />
+		<result property="likeSender" column="LIKESENDER" />
+		<result property="likeReceiver" column="LIKERECEIVER" />
+		<result property="likeCount" column="LIKECOUNT" />
+	</resultMap>
+ -->
+<!-- 		
 		SELECT *
 		FROM MEMBER 
+		WHERE NOT USER_NICK=#{user_nick} AND GRADE='1' AND STATUS='Y'
+-->
+	<!-- 회원 리스트(관리자, 본인, 싫어요 한사람 제외시킴.)-->
+	
+	
+	
+	
+	<!-- 회원 리스트(관리자, 본인, 싫어요 한사람 제외시킴.)-->
+	<select id="selectMlist" resultMap="MemberResultMap" resultType="Member2" parameterType="hashMap">
+		<!--
+		SELECT *
+		FROM MEMBER
+		WHERE NOT USER_NICK=#{user.user_nick}
+		      AND GRADE='1' 
+		      AND STATUS='Y'
+		      AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                       		        FROM MHATE 
+                            		WHERE H_SENDER=#{user.user_nick})
+              AND GENDER = #{genderSelect } 
+              
+             <if test="#{genderSelect } == null"> 
+		<if test='_parameter.equals("null")'>
+         -->
+         
+         
+      
+	    <!--   	SELECT *
+			FROM MEMBER
+			WHERE GRADE='1' 
+			      AND STATUS='Y'
+			<if test='#{genderSelect.equals("") }'>
+		        AND NOT USER_NICK=#{user.user_nick}
+	      		AND USER_NICK NOT IN (SELECT H_RECEIVER 
+	                        		  FROM MHATE 
+	                             	  WHERE H_SENDER=#{user.user_nick})
+			</if> 
+		     <if test='#{genderSelect != null}'>
+				AND NOT USER_NICK=#{user.user_nick}
+				AND USER_NICK NOT IN (SELECT H_RECEIVER 
+	                        		  FROM MHATE 
+	                             	  WHERE H_SENDER=#{user.user_nick})
+	            AND GENDER = #{genderSelect }
+			</if>  --> 
+    
+    
+    
+	
+	   	SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+    		  AND NOT USER_NICK=#{user.user_nick}
+      		  AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                    		        FROM MHATE 
+                             	    WHERE H_SENDER=#{user.user_nick})
+  
+              
+              
+	  	<!-- SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+              	<if test='#{genderSelect.equals("") }'>
+              		 AND NOT USER_NICK=#{user.user_nick}
+      				 AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		           FROM MHATE 
+                             	           WHERE H_SENDER=#{user.user_nick})
+              	</if>
+              	<if test='#{genderSelect.equals("F") }'>
+              		 AND NOT USER_NICK=#{user.user_nick}
+      				 AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		           FROM MHATE 
+                             	           WHERE H_SENDER=#{user.user_nick})
+                     AND GENDER = 'F'
+                     AND GAY = 'N'
+              	</if>
+              	<if test='#{genderSelect.equals("FY") }'>
+              		 AND NOT USER_NICK=#{user.user_nick}
+      				 AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		           FROM MHATE 
+                             	           WHERE H_SENDER=#{user.user_nick})
+                     AND GENDER = 'F'
+                     AND GAY = 'Y'
+              	</if>
+              	<if test='#{genderSelect.equals("M") }'>
+              		 AND NOT USER_NICK=#{user.user_nick}
+      				 AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		           FROM MHATE 
+                             	           WHERE H_SENDER=#{user.user_nick})
+                     AND GENDER = 'M'
+                     AND GAY = 'N'
+              	</if>
+              	<if test='#{genderSelect.equals("MY") }'>
+              		 AND NOT USER_NICK=#{user.user_nick}
+      				 AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		           FROM MHATE 
+                             	           WHERE H_SENDER=#{user.user_nick})
+                     AND GENDER = 'M'
+                     AND GAY = 'Y'
+              	</if> -->
 	</select>
 	
+	<select id="selectMFlist" resultMap="MemberResultMap" resultType="Member2" parameterType="hashMap">
+		SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+              AND NOT USER_NICK=#{user.user_nick}
+              AND GENDER = 'F'
+              AND GAY = 'N'
+      		  AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		    FROM MHATE 
+                             	    WHERE H_SENDER=#{user.user_nick})
+              
+	</select>
+ 	<select id="selectMFYlist" resultMap="MemberResultMap" resultType="Member2" parameterType="hashMap">
+		SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+              AND NOT USER_NICK=#{user.user_nick}
+              AND GENDER = 'F'
+              AND GAY = 'Y'
+      		  AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		    FROM MHATE 
+                             	    WHERE H_SENDER=#{user.user_nick})
+	</select>
+	<select id="selectMMlist" resultMap="MemberResultMap" resultType="Member2" parameterType="hashMap">
+		SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+              AND NOT USER_NICK=#{user.user_nick}
+              AND GENDER = 'M'
+              AND GAY = 'N'
+      		  AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		    FROM MHATE 
+                             	    WHERE H_SENDER=#{user.user_nick})
+	</select>
+	<select id="selectMMYlist" resultMap="MemberResultMap" resultType="Member2" parameterType="hashMap">
+		SELECT *
+		FROM MEMBER
+        WHERE GRADE = '1'
+              AND STATUS= 'Y'
+              AND NOT USER_NICK=#{user.user_nick}
+              AND GENDER = 'M'
+              AND GAY = 'Y'
+      		  AND USER_NICK NOT IN (SELECT H_RECEIVER 
+                        		    FROM MHATE 
+                             	    WHERE H_SENDER=#{user.user_nick})
+	</select> 
+	
+	<!-- 사진 리스트 -->
 	<select id="selectPlist" resultMap="MemberImgResultMap" resultType="MemberImg2">
 		SELECT *
 		FROM MEMBERIMG
 	</select>
+	
+	<!-- 좋아요 삽입 -->
+	<insert id="likeInsert" parameterType="Match">
+	 	INSERT INTO MLIKE VALUES(SEQ_MATCH.NEXTVAL, #{likeSender}, #{likeReceiver}, 'Y')
+	</insert>
+	
+	<!-- 싫어요 삽입 -->
+    <insert id="HateInsert" parameterType="Match">
+	 	INSERT INTO MHATE VALUES(SEQ_MATCH_HATE.NEXTVAL, #{userNo} ,#{H_Sender}, #{H_Receiver}, 'Y')
+	</insert> 
 	
 </mapper>

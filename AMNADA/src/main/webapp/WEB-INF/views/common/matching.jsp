@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -73,6 +74,7 @@
       }
       
       .tinder--cards {
+        	/* margin-left: 215px; */
         flex-grow: 1;
         padding-top: 40px;
         text-align: center;
@@ -112,7 +114,7 @@
       
       .tinder--card h3 {
         color: black;   
-        margin-top: 32px;
+        margin-top: 10px;
         font-size: 32px;
         padding: 0 16px;
         pointer-events: none;
@@ -127,6 +129,8 @@
       }
       
       .tinder--buttons {
+      		    /* margin-left: 215px; */
+      
         flex: 0 0 100px;
         text-align: center;
         padding-top: 20px;
@@ -209,35 +213,157 @@
       .prev:hover, .next:hover {
         background-color: rgba(0,0,0,0.8);
       }
+      
+       /* 분류 버튼들 */
+      #selectGay{
+      	position: absolute; 
+      	top: 100px; 
+      	align-self: center;
+      }
+      
+      #selectGay button{
+      	outline: none; /* 버튼 테두리에 파란거 없애기. */
+      	cursor: pointer;
+      	font-weight: 900;
+      	width: 80px;
+      	height: 35px;
+      	border: 2px solid #ff8282;
+      	background: white;
+   	  	border-radius:10px;
+   	  	font-size: 15px;
+      }
+      .gayBtn{
+      	color: #ff8282
+      }
+      
+      #infoBtn{
+      	border: 0px;
+      	background: none;
+      	margin-left: 350px;
+      	z-index: 999;
+      	cursor: help;
+      	width:35px; 
+      	height: 35px;
+      }
+      
+      /* 모달창 -----------------------------------------*/
+      /* The Modal (background) */
+		.modal {
+		  display: none; /* Hidden by default */
+		  position: fixed; /* Stay in place */
+		  z-index: 1; /* Sit on top */
+		  padding-top: 100px; /* Location of the box */
+		  left: 0;
+		  top: 0;
+		  width: 100%; /* Full width */
+		  height: 100%; /* Full height */
+		  overflow: auto; /* Enable scroll if needed */
+		  background-color: rgb(0,0,0); /* Fallback color */
+		  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		
+		/* Modal Content */
+		.modal-content {
+		 width: 600px;
+	     height: 700px;
+	     margin-left: 43%;
+		
+		  /* background: linear-gradient(135deg, rgba(85,239,203,1) 0%,rgba(30,87,153,1) 0%,rgba(85,239,203,1) 0%,rgba(91,202,255,1) 100%); */
+		  background: linear-gradient(135deg, rgba(85,239,203,1) 0%,rgba(449,87,153,1) 0%,rgba(561,239,203,1) 0%,rgba(463,202,255,1) 100%);;
+		  background-color: #fefefe;
+		  padding: 20px;
+		  border: 1px solid #888;
+		}
+		
+		/* The Close Button */
+		.closeModal {
+		  color: #aaaaaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+		
+		.closeModal:hover,
+		.closeModal:focus {
+		  color: #000;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+		
+		
+		
+		.containerHobby {
+	   		height: auto;
+	  		width:auto;
+			/* background:black; */
+	  		display: flex;
+	 		flex-wrap: wrap;
+		}
+		 .HobbyButton:hover {
+		    cursor: pointer;
+		    border-radius: 30px;
+		  }
+	    
+	    .HobbyButton {
+		  flex: 1 1 auto;
+		  margin: 10px;
+		  padding: 20px;
+		  border: 2px solid #f7f7f7;
+		  text-align: center;
+		  text-transform: uppercase;
+		  position: relative;
+		  overflow:hidden;
+		  transition: .3s;
+		  &:after {
+		    position: absolute;
+		    transition: .3s;
+		    content: '';
+		    width: 0;
+		    left: 50%;
+		    bottom: 0;
+		    height: 3px;
+		    background: #f7f7f7;
+		  }
+				
   </style>
 </head>
    <jsp:include page="matchingMenu.jsp"/>
 <body>
-<!-- 메뉴바는 어느 페이지든 포함하고 있을 테니 여기서 contextPathe 변수값을 만들어주자. -->
+   <!-- 메뉴바는 어느 페이지든 포함하고 있을 테니 여기서 contextPathe 변수값을 만들어주자. -->
    <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
-    <div id="main">
+   
+<div id="main">
      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; AMANDA</span>
      
-     <div id="tinder-body">
+     <div id="tinder-body" style="margin-left: 140px;">
        <div class="tinder">
            <div class="tinder--status">
              <i class="fa fa-remove"></i>
              <i class="fa fa-heart"></i>
            </div>
-            
-            <h2 style="color: black;">맴버 : ${mlist[0] }</h2> 
+           
+           <div id="selectGay" style="z-index: 100;">
+           		<button class="gayBtn" id="gayBtn1" value="F">W</button>&nbsp;&nbsp;
+           		<button class="gayBtn" id="gayBtn2" value="FY">&nbsp;W ♥ W&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           		<button class="gayBtn" id="gayBtn3" value="M">M</button>&nbsp;&nbsp;
+           		<button class="gayBtn" id="gayBtn4" value="MY">&nbsp;M ♥ M&nbsp;</button>
+           </div>
+                        
+  <%--       
+  			 <h2 style="color: black;">맴버 : ${mlist }</h2> 
              <br>
              <h2 style="color: black;">사진 : ${plist[0] }</h2> 
-          <%--    <div>
-                <img src="${contextPath }/resources/userface/${plist[0].renameFileName}" style="width: 200px; height: 200px;">
-                <img src="${plist[0].renameFileName}" style="width: 200px; height: 200px;">
-             </div> --%>
-               
+			 <br>
+             <h2 style="color: black;">로그인 정보 : ${loginUser }</h2> 
+             <br>
+             <h2 style="color: black;">세션으로 로그인 정보  : ${loginUser2.user_nick }</h2> 
+             <h2 style="color: black;">세션으로 로그인 정보 중 회원번호   : ${loginUser2.u_mid }</h2> 
+   --%>
            <div class="tinder--cards"> 
+				<!-- ajax에서 만든 카드 들어가는 자리. -->
            </div>  
       
            <div class="tinder--buttons">
-           <!-- -o하면  빈 아이콘-->   
              <button id="previous"><i class="fa fa-undo" style="color: yellowgreen;"></i></button>
              <button id="nope"><i class="fa fa-remove"></i></button>
              <button id="love"><i class="fa fa-heart"></i></button>
@@ -246,13 +372,69 @@
       </div>
    </div>
    
-<!-- ajax로 매치카드 생성하기. -->
+   
+   
+	<%-- <c:forEach var="mmlist" items="${mlist }" varStatus="status">
+	
+	    <div style="width: 300px; height: 300px; background: black;">안녕</div>
+	
+	</c:forEach>
+ --%>
+
+
+   
+			<!-- MODAL창 -->
+		 	<div id="myModal" class="modal" style="z-index: 101">
+			  <div class="modal-content">
+ 			    <span class="closeModal">&times;</span> 
+			    <h2 align="center" style="margin-top: -8px;margin-bottom: 10px;">${loginUser2.user_nick }</h2>
+			    <h2 align="center">PHOTOS</h2>
+			    <div style="width:auto; height:62%; background: white;">
+			    	
+			    </div>
+			    <p align="center" style="font-size:35px">TOP3</p>
+			    	<div class="containerHobby">
+					    <div class="HobbyButton">Rounded Corners1</div>
+					    <div class="HobbyButton">Rounded Corners2</div>
+					    <div class="HobbyButton">Rounded Corners3</div>
+					</div>
+			  </div>
+			</div> 
+			
+		 	<script>
+					var modal = document.getElementById("myModal");
+					var btn = document.getElementById("infoBtn");
+					var span = document.getElementsByClassName("closeModal")[0];
+	
+					function infoBtnn() {	
+					  modal.style.display = "block";
+					}
+					
+					span.onclick = function() {
+					  modal.style.display = "none";
+					}
+					
+					window.onclick = function(event) {
+					  if (event.target == modal) {
+					    modal.style.display = "none";
+					  }
+					} 
+			</script> 
+</div>
+ 
 <script>
-   // ajax로 카드를 먼저 만들어주자!
-   makeCard();
+   // ajax의 작업을 먼저 완료하고, 그다음에 다큐먼트들을 긁어온다음, 카드들을 생성해야되.
+  	 /*
+	   	 window.onload = function() {
+		   makeCard();
+		 } 
+   	 */
+   	 
+	makeCard("");
 
     // 자동실행 부분
     $(function() {
+    	
       var tinderContainer = document.querySelector('.tinder');
       var allCards = document.querySelectorAll('.tinder--card');
       var nope = document.getElementById('nope');
@@ -270,7 +452,6 @@
         
         tinderContainer.classList.add('loaded');
       }
-      /* -------------- */
       
       initCards();
       
@@ -325,8 +506,6 @@
           }
         });
       });
-      /* --------------------------------- */
-      
       
       function createButtonListener(love) {
         return function (event) {
@@ -338,13 +517,49 @@
           var card = cards[0];
       
           card.classList.add('removed');
-      
-          if (love) {
-            card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
-          } else {
-            card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+          
+          var latest = $(".removed #tUser-name").last().text(); // 가장 최근 카드 선택자
+          if (love) { // 좋아요 누를시 카드 움직임.
+           
+	             card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+	             
+	             $.ajax({
+	            	  url:"mLike.do",
+	                  type:"get",
+	                  data: {sender: "${loginUser2.user_nick }", receiver: latest},
+	                  success: function(data) {
+	                	  if(data == "success"){
+	                		  alert("데이터 삽입 성공");
+	                	  }
+	                  },
+	                  error:function(request, status, errorData){
+	                      alert("매칭 에이젝스 error code: " + request.status + "\n"
+	                            +"message: " + request.responseText
+	                            +"error: " + errorData);
+	                  }
+	             }); 
+          } else { // 취소 누를 시 카드 움직임
+				alert("취소 클릭됨");
+        	 	card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+        	 	$.ajax({
+	            	  url:"mHate.do",
+	                  type:"get",
+	                  data: {sender: "${loginUser2.user_nick }",
+	                	  	 receiver: latest,
+	                	  	 userNo: "${loginUser2.u_mid }" },
+	                  success: function(data) {
+	                	  if(data == "success"){
+	                		  alert("데이터 삽입 성공");
+	                	  }
+	                  },
+	                  error:function(request, status, errorData){
+	                      alert("매칭 에이젝스 error code: " + request.status + "\n"
+	                            +"message: " + request.responseText
+	                            +"error: " + errorData);
+	                  }
+	             });  
           }
-      
+          
           initCards();
       
           event.preventDefault();
@@ -357,20 +572,27 @@
       nope.addEventListener('click', nopeListener);
       love.addEventListener('click', loveListener);
     });
+
+    
     
     
     
     
     // ajax 카드만들기 함수.
-    function makeCard() {
-       // 1. 사진뺀 카드만들기
+    function makeCard(parameter) {
        $.ajax({
           url:"mList.do",
           type:"get",
+          data: {
+	        	  	 loginUser: "${loginUser2.user_nick }",
+	        	  	 genderSelect: parameter
+        	     },
           dataType: "json",
+          async: true,
           contentType:"application/json;charset=utf-8",
           success: function(mlist) {
-             $.each(mlist, function(index, value) {
+        	  $(".tinder--cards").html(""); // 앞의 카드 비워주기.
+        	  $.each(mlist, function(index, value) {
                 var str = 
                            "<div id = card"+(index+1)+" class=tinder--card>"+
                            "      <div class='mySlides"+(index+1)+" fade' style='pointer-events: none;'>"+
@@ -391,28 +613,23 @@
                            "      </div>"+
                            "      <h3 id=tUser-name>"+mlist[index].user_nick +"</h3>"+
                            "      <p id=tUser-summary>"+mlist[index].user_into +"</p>"+
+                           "      <br>"+
+                           "	  <button id=infoBtn type=button onclick=infoBtnn()><img src='${contextPath }/resources/images/info5.png'></button>"+
                            "</div>";
-                        
                        $(".tinder--cards").append(str);    
              });
           },
+                          /*  "	<div id='myModal' class='modal' style='z-index: 101'>"+
+                           " 		<div class='modal-content'>"+
+                           "        	<span class='closeModal'>&times;</span>"+
+                           " 			<p>슈밤</p>"+
+                           "		</div>"+
+                           "	</div>"; */
           error:function(request, status, errorData){
              alert("매칭 에이젝스 error code: " + request.status + "\n"
                    +"message: " + request.responseText
-                   
                    +"error: " + errorData);
-          }
-       });
-       
-       // 2. 사진을 뺀 자리에 넣기.
-       $.ajax({
-          url:"mList.do",
-          type:"get",
-          dataType: "json",
-          contentType:"application/json;charset=utf-8",
-          success: function(plist) {
-            
-         }
+          },
        });
     } 
 </script>
@@ -420,62 +637,56 @@
      
 <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
 <script  src="js/index.js"></script>
-<script type="text/javascript">
-   
-</script>
-     
+
+    <!-- selectGay 버튼  -->
+    <script>
+	    $("#gayBtn1").click(function() {
+			$(this).css('background','#ff8282').css('color','white');
+			$("#gayBtn2").css('background','white').css('color','#ff8282');
+			$("#gayBtn3").css('background','white').css('color','#ff8282');
+			$("#gayBtn4").css('background','white').css('color','#ff8282');
+		 	btn1 = $(this).val();
+			alert("변수에담자" + btn1); 
+			makeCard(btn1);
+		});
+		$("#gayBtn2").click(function() {
+			$(this).css('background','#ff8282').css('color','white');
+			$("#gayBtn1").css('background','white').css('color','#ff8282');
+			$("#gayBtn3").css('background','white').css('color','#ff8282');
+			$("#gayBtn4").css('background','white').css('color','#ff8282');
+			btn1 = $(this).val();
+			alert("변수에담자" + btn1); 
+			makeCard(btn1);
+		});
+		$("#gayBtn3").click(function() {
+			$(this).css('background','#ff8282').css('color','white');
+			$("#gayBtn1").css('background','white').css('color','#ff8282');
+			$("#gayBtn2").css('background','white').css('color','#ff8282');
+			$("#gayBtn4").css('background','white').css('color','#ff8282');
+			btn1 = $(this).val();
+			alert("변수에담자" + btn1); 
+			makeCard(btn1);
+		
+		});
+		$("#gayBtn4").click(function() {
+			$(this).css('background','#ff8282').css('color','white');
+			$("#gayBtn1").css('background','white').css('color','#ff8282');
+			$("#gayBtn2").css('background','white').css('color','#ff8282');
+			$("#gayBtn3").css('background','white').css('color','#ff8282');
+			btn1 = $(this).val();
+			alert("변수에담자" + btn1); 
+			makeCard(btn1);
+		});
+    </script>
      
     <!-- previous 버튼 누를 시. -->
     <script>
-    /*          
-    .css('z-index','1000')
-    .css('opacity', '1')
-   .css('touch-action', 'pan-y')
-   .css('user-select', 'none')          
-   .css('-webkit-user-drag', 'none')
-   .css('-webkit-tap-highlight-color', 'rgba(0,0,0,0)'); 
-      .css(transform: scale(1) translateY(0px)) ;
-*/
-
-
-//var A = $("#card"+i).text();
-//var A = $("#card"+i);
-
-//alert(A);
-//alert(i);
-//var ind = 3;
-
-   /* 
-      for(var j = 1; j < ${mlist.size()}; j++){
-              $("#card"+(i-(i-j))).css('transform','translate(0px, 0px) rotate(0deg)').css('z-index','800');
-        }
-   */
-   
        $("#previous").on('click', function() {
-          alert("dd");
-           var test = $(".removed").last();
-         console.log(test);    
-         test.removeClass('.removed');
-           test.css('transform','translate(0px, 0px) rotate(0deg)').css('z-index','800');
-    
-           /*       var count = 2;
-          for(var i = 1; i <= ${mlist.size()}; i++){   
-             
-              $("#card"+(i-3)).css('transform','translate(0px, 0px) rotate(0deg)').css('z-index','800').css('transform', 'scale(1) translateY(0px)');
-         } */
-          
+     	   var test = $(".removed").last();
+		   test.removeClass('.removed');
+     	   test.css('transform','translate(0px, 0px) rotate(0deg)').css('z-index','800');
       });
     </script>
-    
-    <!-- nope버튼 투를 시 -->
-   <!--  <script>
-       $("#nope").on('click', function() {
-         alert("dd");
-         
-         
-      });
-    </script> -->
-    
     
     <!-- superLike 버튼 누를 시 -->
     <script>
@@ -485,11 +696,6 @@
       
       });
     </script>
-     
-     
-     
-     
-     
      
     <!-- 이미지 슬라이드 관련 --> 
      <script>
@@ -510,8 +716,8 @@
       // 슬라이드 보여주는 함수
       function showSlides(n) {
           var i;
-        //var slides = document.getElementsByClassName("mySlides"); // 사진부분.
-          for(var num = 1   ; num <= 4; num++){ 
+        // var slides = document.getElementsByClassName("mySlides"); // 사진부분.
+          for(var num = 1   ; num <= ${mlist.size() }; num++){ 
         //   var slides = $("#card"+num+" .mySlides"+num);
           var slides = $(".mySlides"+num);
           var dots = document.getElementsByClassName("dot"); // 사진 넘길 수 있는 점들.
@@ -531,12 +737,10 @@
            slides[slideIndex-1].style.display = "block";  
            dots[slideIndex-1].className += " active";
         }      
-           
       }
    </script>
      
      
-   </div> 
 </body>
    <jsp:include page="matchingFooter.jsp"/>
 </html>

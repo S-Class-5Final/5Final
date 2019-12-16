@@ -88,25 +88,6 @@
 		WHERE USER_ID=#{user_id} AND STATUS ='Y'
 	</update>
 	
-	<!-- 회원가입 아이디 체크 -->
-	<select id="minsertIdCheck" parameterType="string" resultType="_int">
-	SELECT COUNT(*) FROM MEMBER
-	WHERE USER_ID=#{user_id}	
-	</select>
-	
-	<!-- 회원가입 닉네임 체크 -->
-	<select id="minsertNickCheck" parameterType="string" resultType="_int">
-	SELECT COUNT(*) FROM MEMBER
-	WHERE USER_NICK=#{user_nick}	
-	</select>
-	
-	<!-- 임시 비밀번호 -->
-	<update id="mUpdatePwd" parameterType="Member">
-		UPDATE MEMBER
-		SET USER_PWD=#{user_pwd}
-		WHERE USER_ID=#{user_id} AND STATUS ='Y'
-	</update>
-	
 	<!-- 카카오 로그인 -->
 	<select id="mloginkakaoCheck" parameterType="Member" resultType="_int">
 	SELECT COUNT(*) FROM MEMBER

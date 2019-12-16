@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 10 18:14:12 KST 2019
+grpc-grpclb-1.19.0-sources.jar>central=
+grpc-grpclb-1.19.0.jar>central=
+grpc-grpclb-1.19.0.pom>central=

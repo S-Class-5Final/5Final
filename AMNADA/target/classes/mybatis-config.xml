@@ -7,6 +7,7 @@
 	
 	<!-- 클래스들을 미리 만들어 놔야 별칭 지정 한 것에서 에러가 발생 하지 않는다. -->
 	<typeAliases>
+		<!-- Member  -->
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.Hobby" alias="Hobby"/>
 		<typeAlias type="com.fianl.AMANDA.member.model.vo.MemberImg" alias="MemberImg"/>

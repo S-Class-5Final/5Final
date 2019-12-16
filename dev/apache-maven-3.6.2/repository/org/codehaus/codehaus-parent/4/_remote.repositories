@@ -1,3 +1,7 @@
 #NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+<<<<<<< HEAD
 #Wed Dec 04 01:24:58 KST 2019
+=======
+#Tue Dec 10 16:59:03 KST 2019
+>>>>>>> refs/remotes/origin/master
 codehaus-parent-4.pom>central=

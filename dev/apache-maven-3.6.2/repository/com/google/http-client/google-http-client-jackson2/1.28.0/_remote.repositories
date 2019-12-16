@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 10 17:00:00 KST 2019
+google-http-client-jackson2-1.28.0-sources.jar>central=
+google-http-client-jackson2-1.28.0.pom>central=
+google-http-client-jackson2-1.28.0.jar>central=

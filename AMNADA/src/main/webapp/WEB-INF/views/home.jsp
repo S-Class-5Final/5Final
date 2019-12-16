@@ -18,11 +18,11 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <!-- 이메일 js -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <style>
 .tImg {
 	margin-left: 400px;
 	margin-top: 300px;
-	
 }
 #service {
 	background: #e793f0;
@@ -42,14 +42,17 @@
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	overflow-y: hidden; /* 스크롤바 없애기 */
+	overflow-x: hidden;
 }
 /* Modal Content/Box */
 .modal-content {
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgb(255, 255, 255);
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
+	border-radius: 15px;
 }
 /* The Close Button */
 .close {
@@ -70,8 +73,9 @@
 	border: 4px solid blue;
 }
 #infoView {
-display: none;
+	display: none;
 }
+<<<<<<< HEAD
 #infoView1{
 display: none;
 }
@@ -85,7 +89,368 @@ display: none;
 display:none;
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/master
+=======
+#infoView1 {
+	display: none;
+}
+
+#infoView2 {
+	display: none;
+}
+
+#infoView3 {
+	display: none;
+}
+
+#pwdCheckView {
+	display: none;
+}
+
+/* 메인호버기능 */
+.sm-link { -
+	-uismLinkDisplay: var(- -smLinkDisplay, inline-flex); -
+	-uismLinkTextColor: var(- -smLinkTextColor); -
+	-uismLinkTextColorHover: var(- -smLinkTextColorHover);
+	display: var(- -uismLinkDisplay);
+	color: var(- -uismLinkTextColor);
+	position: relative;
+	overflow: hidden;
+}
+
+/* sm-link_padding-all */
+.sm-link_padding-all { -
+	-uismLinkLineWeight: var(- -smLinkLineWeight, 2px); -
+	-uismLinkLineColor: var(- -smLinkLineColor, #000); -
+	-uismLinkPadding: var(- -smLinkPadding, 5px);
+	padding: var(- -uismLinkPadding);
+}
+
+.sm-link_padding-all::before, .sm-link_padding-all::after {
+	width: 100%;
+	height: var(- -uismLinkLineWeight);
+	left: 0;
+}
+
+.sm-link_padding-all::before {
+	top: 0;
+}
+
+
+.sm-link_padding-all::after {
+	bottom: 0;
+}
+
+.sm-link_padding-all .sm-link__label::before, .sm-link_padding-all .sm-link__label::after
+	{
+	width: var(- -uismLinkLineWeight);
+	height: 100%;
+	top: 0;
+}
+
+.sm-link_padding-all .sm-link__label::before {
+	left: 0;
+}
+
+.sm-link_padding-all .sm-link__label::after {
+	right: 0;
+}
+
+.sm-link_padding-all::before, .sm-link_padding-all::after,
+	.sm-link_padding-all .sm-link__label::before, .sm-link_padding-all .sm-link__label::after
+	{
+	content: "";
+	background-color: var(- -uismLinkLineColor);
+	position: absolute;
+	opacity: 0;
+	will-change: transform, opacity;
+	transition-property: transform, opacity;
+}
+
+.sm-link_padding-all:hover::before, .sm-link_padding-all:hover::after,
+	.sm-link_padding-all:hover .sm-link__label::before,
+	.sm-link_padding-all:hover .sm-link__label::after {
+	opacity: 1;
+}
+
+/* sm-link_padding-bottom */
+.sm-link_padding-bottom { -
+	-uismLinkLineWeight: var(- -smLinkLineWeight, 2px); -
+	-uismLinkLineColor: var(- -smLinkLineColor, #000);
+	padding-bottom: var(- -uismLinkLineWeight);
+	position: relative;
+}
+
+.sm-link_padding-bottom::after {
+	content: "";
+	width: 100%;
+	height: var(- -uismLinkLineWeight);
+	background-color: var(- -uismLinkLineColor);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+/* sm-link_bg */
+.sm-link_bg { -
+	-uismLinkLineColor: var(- -smLinkLineColor, #000); -
+	-uismLinkTextColorHover: var(- -smLinkTextColorHover, #fff); -
+	-uismLinkPadding: var(- -smLinkPadding, 5px);
+	padding: var(- -uismLinkPadding);
+	transition: color .3s ease-out;
+}
+
+.sm-link_bg::before, .sm-link_bg::after {
+	content: "";
+	background-color: var(- -uismLinkLineColor);
+	opacity: 0;
+	position: absolute;
+	transition: transform .2s ease-out, opacity .2s ease-out .03s;
+}
+
+.sm-link_bg .sm-link__label {
+	position: relative;
+	z-index: 2;
+}
+
+.sm-link_bg:hover::before, .sm-link_bg:hover::after {
+	opacity: 1;
+	transition-duration: .35s, .35s;
+	transition-delay: 0s, 0s;
+}
+
+.sm-link_bg:hover {
+	color: var(- -uismLinkTextColorHover);
+}
+
+/* sm-link_text */
+.sm-link_text::before {
+	content: attr(data-sm-link-text);
+	color: var(- -uismLinkTextColorHover);
+	position: absolute;
+}
+
+.sm-link_text::before, .sm-link_text .sm-link__label {
+	transition-property: transform;
+	transition-timing-function: cubic-bezier(.86, .6, .08, 1.01);
+	transition-duration: .3s;
+}
+
+.sm-link_text:hover::before, .sm-link_text:hover .sm-link__label {
+	transition-duration: .4s;
+}
+
+/* effect 1 */
+.sm-link1::before {
+	transform: translate3d(-105%, 0, 0);
+}
+
+.sm-link1::after {
+	transform: translate3d(105%, 0, 0);
+}
+
+.sm-link1 .sm-link__label::before {
+	transform: translate3d(0%, -100%, 0);
+}
+
+.sm-link1 .sm-link__label::after {
+	transform: translate3d(0%, 100%, 0);
+}
+
+.sm-link1::before, .sm-link1::after, .sm-link1 .sm-link__label::before,
+	.sm-link1 .sm-link__label::after {
+	transition-timing-function: ease-out;
+	transition-duration: .2s, .15s;
+	transition-delay: 0s, .15s;
+}
+
+.sm-link1:hover::before, .sm-link1:hover::after, .sm-link1:hover .sm-link__label::before,
+	.sm-link1:hover .sm-link__label::after {
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+	transition-duration: .25s;
+	transition-delay: 0s;
+}
+
+.sm-link { -
+	-smLinkPadding: 10px 15px; -
+	-smLinkLineWeight: 5px; -
+	-smLinkLineColor: #ffffff; -
+	-smLinkTextColor: #243aab; -
+	-smLinkTextColorHover: #1b255a;
+}
+
+.sm-link_bg { -
+	-smLinkTextColorHover: #fff;
+}
+/* 텍스트 박스 */
+.logintable {
+	margin: auto;
+}
+
+/* 사진 */
+.img_wrap img {
+	width: 100%;
+	height: 100%;
+}
+
+/* 로그인버튼 */
+.loginbtn {
+	margin: auto;
+	background: #FF6464;
+	color: #fff;
+	border: none;
+	position: relative;
+	width: 300px;
+	height: 45px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	border-radius: 6.5px;
+}
+
+.loginbtn:hover {
+	background: #fff;
+	color: #FF6464;
+}
+
+.loginbtn:before, .loginbtn:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #FF6464;
+	transition: 400ms ease all;
+}
+
+.loginbtn:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+.loginbtn:hover:before, .loginbtn:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+/* 회원가입 및 버튼 css */
+.joinform, .joinform::after {
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.joinform {
+	margin: auto;
+	background: none;
+	border-radius: 5px;
+	color: black;
+	display: block;
+	font-weight: bold;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.joinform::before, .joinform::after {
+	background: #fff;
+	content: '';
+	position: absolute;
+	z-index: -1;
+}
+
+.joinform:hover {
+	background: #FF6464;
+	color: #fff;
+	border: 3px solid #FF6464;
+}
+
+.joinform::after {
+	height: 0;
+	left: 50%;
+	top: 50%;
+	width: 0;
+}
+
+.joinform:hover:after {
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+/* 텍스트박스 */
+.textboxra {
+	border-radius: 6.5px;
+}
+
+/* 홈페이지 첫번째 table */
+.infoViewtable, .infoView2table{
+	margin: auto;
+}
+/* 유효성 검사 글씨체 */
+#checkIdtext, #checkPwdtext, #checkNicktext {
+	font-size: 8px;
+}
+
+#Imglist #first, #second, #third {
+	float: left;
+	border: 1px solid black;
+}
+
+/* 다음 버튼 */
+.nextbtnstyle {
+	margin: auto;
+	background: #FF6464;
+	color: #fff;
+	border: none;
+	position: relative;
+	width: 100px;
+	height: 45px;
+	font-size: 14px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	border-radius: 6.5px;
+}
+
+.nextbtnstyle:hover {
+	background: #fff;
+	color: #FF6464;
+}
+
+.nextbtnstyle:before, .nextbtnstyle:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #FF6464;
+	transition: 400ms ease all;
+}
+
+.nextbtnstyle:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+.nextbtnstyle:hover:before, .nextbtnstyle:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
 >>>>>>> refs/remotes/origin/master
 }
 </style>
@@ -110,38 +475,61 @@ display:none;
 		</div>
 		
 		<div class="content">
-			<div class="timg">					
-				<img src="resources/images/mainImg.png" id = "myimg">
+			<div class="timg sm-link__label sm-link sm-link_padding-all sm-link1">			
+				<span class="sm-link__label"><img src="resources/images/mainImg.png" id = "myimg"></span>
 			</div>
+			
 	<!-- 모달창 연습 -->
 			<div id="myModal" class="modal">
 		<!-- Modal content -->
 				<div class="modal-content">
-					<div>
+					<div class="closebten">
 						<span class="close">&times;</span><br><br><br>
 					</div>
 			
 					<div id="loginview">
 					<form action="mlogin.do" method="post" id="loginviewform">
+					<table class="logintable" >
+						<tr>
+						<td height="70px" >
 						<div class="textbox" id="divId">
-							<input type="text" id ="loginId" name="loginId" data-rule-required="true" size="50px" placeholder="ex) OOOO@naver.com">
+							<input type="text" id ="loginId" class ="textboxra" name="loginId" data-rule-required="true" size="46px" placeholder="ex) OOOO@naver.com">
 						</div>
-						<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
 						<div class="textbox" id="divPassword">
-							<input type="password" id="loginPwd" name="loginPwd" data-rule-required="true" size="65px" placeholder="비밀번호를 입력하세요">
+							<input type="password" id="loginPwd" class ="textboxra" name="loginPwd" data-rule-required="true" size="60px" placeholder="비밀번호를 입력하세요">
 						</div> 
 						<br>
-						<br>
-						<div class="textbox" id="loginbtn">
-							<button type="button" onclick="loginCheck()">Login</button>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<div class="textbox">
+						<button type="button" class="loginbtn" onclick="loginCheck()">Login</button>
 						</div>
+						<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<div class="textbox">
+						<a id="kakao-login-btn"></a>
+						</div>
+						</td>
+						</tr>
+						<tr>
+						<td>
+						<br>
+						<button type = "button" id="insertmemberview" class="joinform" >아이디가 없으신가요?</button>
+						<button type = "button" id="pwdCheck" class="joinform">비밀번호가 기억이 나지 않으세요?</button>
+						</td>
+						</tr>
+					</table>
 					</form>
-						<br>
-						<div class = "textbox" id="loginbtn">
-							<button id="insertmemberview">회원가입</button> / <button type = "button" id="pwdCheck">비밀번호 찾기</button>
-						</div>
 					</div>
-					
 					<div id ="pwdCheckView">
 					<form action="mSerchPwd.do" method = "post" id="SerchPwdForm">
  						<div class="textbox">
@@ -156,91 +544,155 @@ display:none;
 					<div id= "infoView">
 					<form action="minsert.do" method="post" id="memberjoinForm" enctype="multipart/form-data" onsubmit = "toEnabled()">
 						<div id="infoView1">
+						<table class="infoViewtable">
+							<tr>
+								<td>
 						<div id="checkId">
-						아이디(ID) : <input type= "text" name = "user_id" id="user_id" oninput = "checkId()"> @
-						<select id="email" name="email" style="width: 200">
+						아이디(ID) : <input type= "text" name = "user_id" id="user_id" oninput = "checkId()" class="textboxra"> @
+						<select id="email" name="email" style="width: 200" class="textboxra">
 							<option value="naver.com">naver.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="gmail.com">gmail.com</option>
-							<option value="nate.com">nate.com</option>
+						 	<option value="nate.com">nate.com</option> 
 							<option value="1">직접입력</option>
 						</select> &nbsp;&nbsp;
-						<input type="text" name="user_email" id = "user_email" disabled> <br>
+						<input type="text" name="user_email" id = "user_email" class="textboxra" disabled class="textboxra"> <br>
 						<div id="checkIdtext">아이디를 입력 해주세요</div>
-						</div><br>
+						<input type= "hidden" name="kakao" id = "kakao"> 
+						</div>
+								</td>
+							</tr>
+						<tr>
+							<td>
 						<div id="checkPwd">
-						패스워드(PWD) : <input type = "password" name="user_pwd" id="user_pwd">&nbsp;&nbsp;
-						패스워드 확인(PWD) : <input type = "password" name = "user_pwdC" id="user_pwdC"><br>
+						패스워드(PWD) : <input type = "password" name="user_pwd" id="user_pwd" class="textboxra">&nbsp;&nbsp;
+						패스워드 확인(PWD) : <input type = "password" name = "user_pwdC" id="user_pwdC" class="textboxra"><br>
 						<div id ="checkPwdtext">비밀번호를 입력하세요 </div>
 						</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 						<div id="checkNick">
-						별명(Name) : <input type = "text" name="user_nick" id="user_nick"><br>
-						<div id= "checkNicktext"></div>
+						별명(Name) : <input type = "text" name="user_nick" id="user_nick" class="textboxra"><br>
+						<div id= "checkNicktext">닉네임을 입력하세요 </div>
 						</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 						성별 : 남 <input type="radio" name = "gender" class = "gender" value = "M" checked="checked"> &nbsp; 
-						여 : <input type = "radio" name = "gender" class = "gender" value="F"><br>
+						여  <input type = "radio" name = "gender" class = "gender" value="F"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
 						번호  : 
-						<select id="phone1" name="phone1" style="width: 200">
+						<select id="phone1" name="phone1" style="width: 200" class="textboxra">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
 							<option value="017">017</option>
 							<option value="019">019</option>
 						</select> -
-						<input type="text" name= "phone2" id="phone2"> - 
-						<input type="text" name = "phone3" id="phone3"><br>
-							<div class= "textbox" id="nextbtn">
-								<button type="button" id="nextpage1">다음</button>
+						<input type="text" name= "phone2" id="phone2" class="textboxra"> - 
+						<input type="text" name = "phone3" id="phone3" class="textboxra"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+						<div class= "textbox" id="nextbtn">
+						<br>
+						<button type="button" id="nextpage1" class="nextbtnstyle">다음</button>
 							</div>
+							</td>
+						</tr>
+							</table>
 						</div>
-			
+					
 					<div id = "infoView2">
+					<table class="infoView2table">	
+						<tr>
+							<td>
 					키 : <input type="number" name="height" id= "height">&nbsp;
 					나이 : <input type ="number" name="age" id = "age">&nbsp;
-					사는곳 : <input type="text" name="address" id = "address"><br>
-					
-					동성 여부 : 예 : <input type="radio" name = "gay" class = "gay" value = "Y"> &nbsp; 
-					아니오 : <input type = "radio" name = "gay" class = "gay" value="N" checked="checked"><br>
-					한줄 소개 :  <input type= "text" name="user_into"><br>
+					사는곳 : <input type="text" name="address" id = "address">
+							</td>
+						</tr>
+					<tr>
+						<td>
+						동성 여부 : 예 : <input type="radio" name = "gay" class = "gay" value = "Y"> &nbsp; 
+						아니오 : <input type = "radio" name = "gay" class = "gay" value="N" checked="checked"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							한줄 소개 :  <input type= "text" name="user_into"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>
 						<div id = "hobby">
 							취미 : 
 							<input type="checkbox" id="movie" name = "movie" value = "Y">영화 &nbsp;
 							<input type="checkbox" id="sing" name = "sing" value = "Y">노래 &nbsp;
-							<input type="checkbox" id="game" name= "game" value = "Y">게임 &nbsp;<br>
+							<input type="checkbox" id="game" name= "game" value = "Y">게임 &nbsp;
 							<input type="checkbox" id="jmt" name= "jmt" value = "Y">JMT &nbsp;
 							<input type="checkbox" id="pet" name = "pet" value = "Y">애완동물 &nbsp;
-							<input type="checkbox" id="cafe" name = "cafe" value = "Y">카페&nbsp;<br>
+							<input type="checkbox" id="cafe" name = "cafe" value = "Y">카페&nbsp;
 							<input type="checkbox" id="working" name = "working" value = "Y">산책&nbsp;
 							<input type="checkbox" id="poto" name= "poto" value = "Y">사진&nbsp;
 							<input type="checkbox" id="travel" name="travel" value = "Y">여행
 						</div>
-						<button type="button" id = "inforbtn">이전</button>
-						<button type="button" id = "lastpage">다음</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<div class= "textbox">
+						<button type="button" id = "inforbtn" class="nextbtnstyle">이전</button>&nbsp;&nbsp;
+						<button type="button" id = "lastpage" class="nextbtnstyle">다음</button>
+						</div>
+						
+						</td>
+					</tr>
+						</table>
 					</div>
 					
 					<div id = "infoView3">
+					<table class= "infoView3table">
+					<tr>
+						<td>
 						<div id="Imglist"> 
 							<div id="first">
-								<img id = "firstImg" width="300" height="300">
+								<img id = "firstImg" src="resources/images/image.png" onerror="this.src='resources/images/image.png'" width="300" height="300">
 							</div>
 							<div id = "second">
-								<img id= "secondImg" width ="300" height = "300">
+								<img id= "secondImg" src="resources/images/image.png" width ="300" height = "300">
 							</div>
 							<div id = "third">
-								<img id= "thirdImg" width ="300" height = "300">
+								<img id= "thirdImg" src="resources/images/image.png" width ="300" height = "300">
 							</div>
 						</div>
-					<button type="button" id="nextpage">이전으로</button><br>
-					<button type="button" id="minsertbtn" onclick="abc()">가입</button><br>
-<!-- 						<div style="z-index: 100">
-						<button type="button" id="nextpage">이전으로</button><br>
-							<button type="button" id = "minsertbtn">회원 가입완료</button>
-						</div> -->
+						</td>
+					</tr>
+					<tr>
+						<td>
+					<div class= "textbox">
+					<br>
+					<button type="button" id="nextpage" class="nextbtnstyle">이전</button>
+					<button type="button" id="minsertbtn" onclick="abc()" class="nextbtnstyle">가입</button><br>
+					</div>
+					</td>
+					</tr>
+					</table>			
+						<form id = "file_imgfrom" method="post" enctype="multipart/form-data" action ="">
 						<div id = "fileArea" type ="hidden">
 							<input type = "file" id="thumbnailImg1" multuple="multuple" name="thumbnailImg1" onchange="LoadImg(this,1)">
 							<input type = "file" id="thumbnailImg2" multuple="multuple" name="thumbnailImg2" onchange="LoadImg(this,2)">
 							<input type = "file" id="thumbnailImg3" multuple="multuple" name="thumbnailImg3" onchange="LoadImg(this,3)">
 						</div>
+						</form>
+
 						</div>
 					</form>
 				</div>
@@ -248,13 +700,153 @@ display:none;
 		</div>
 						<script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+//카카오
+$(function(){
+	Kakao.init('2258d057a7a976d9f07e9e4ad2af57fe');
+    // 카카오 로그인 버튼을 생성합니다.
+
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      lang : 'kr',
+      size : 'large',
+      success: function(authObj) {
+    	  Kakao.API.request({
+    	         url: '/v2/user/me',
+    	         success: function(res) {
+    	        	 var kakaoid = res['id'];
+    	        	 var nick = res['properties']['nickname'];
+    	        	var kakaoEmail = res['kakao_account']['email'];
+    	        	// console.log(JSon.stringify(res.profile));
+    	        	console.log(kakaoid);
+    	        	console.log(nick);
+    	        	console.log(kakaoEmail);
+    	        	 console.log(JSON.stringify(res.id));
+    	        	 //console.log(JSON.stringify(res.profile));
+  	       	  		//console.log(JSON.stringify(res.account_email));        	 
+     	        	 $.ajax({
+    	                 url:"kakaoLogin.do",
+    	                 type:"post",
+    	                 data:{
+    	                	 kakaoId:kakaoid,
+    	                	 kakaoEmail:kakaoEmail
+    	                	 },
+    	                 success:function(data){
+							switch (data) {
+ 							case '0':
+								alert("고객님의 카카오톡 E-mail을 누군가가 사용중입니다. 새로 이메일을 만들어 주세요");
+								insertmemberview.onclick();
+								$("#kakao").val(kakaoid);
+								alert(kakaoid);
+								break; 
+							case '1':
+								alert("로그인 완료");
+								location.href="home.do";
+								break;
+							case '2':
+								alert("회원가입 시작 합니다.");
+								alert(kakao);
+								insertmemberview.onclick();
+								var kakaoemail = kakaoEmail.split('@');
+								$("#user_id").val(kakaoemail[0]);
+								var size = $("#email option").length;
+ 								for( i=0 ; i <size;i++){
+									if(kakaoemail[1] ==$("#email option:eq("+i+")").val())
+										{
+										$("#email option:eq("+i+")").attr("selected","selected");
+										$("#user_email").val(kakaoemail[1]);
+						            	$("#checkId").css('background','rgb(0,255,0,0.4)');
+						            	$("#checkIdtext").html('가입 가능한 아이디 입니다.');
+										idUsable = true;
+										$("#user_pwd").focus();
+										}
+									else{
+										$("#email option:eq(4)").attr("selected","selected");
+							            $("#user_email").val(""); // 값 초기화
+										$("#user_email").val(kakaoemail[1]);
+						            	$("#checkId").css('background','rgb(0,255,0,0.4)');
+						            	$("#checkIdtext").html('가입 가능한 아이디 입니다.');
+						            	$("#user_pwd").focus();
+										idUsable = true;
+									}
+								} 
+								$("#kakao").val(kakaoid);									
+								
+								break;
+							case '3':
+								alert("카카오 ID를 만드신 내역이 나옵니다. ID를 찾아주세요");
+								break;
+							}
+    	                 },
+    	                 error:function(data){
+    	                    console.log("서버 통신 안됨");
+    	                 }
+    	              }); 
+    	  
+    	         }
+    	  
+    	         })
+      },
+      fail: function(err) {
+		alert("에러");
+      }
+    });
+    
+    
+
+});
+ //얼굴 인식 테스트 코드 
+ function test10(){ 
+	var formData = new FormData();
+	formData.append("imgtest",$("#imgtest")[0].files[0]);
+	
+	$.ajax({
+		url: "imgCheckTest.do",
+		data : formData,
+		processData:false,
+		contentType:false,
+		type:'POST',
+		dataType:'JSON',
+		success: function(data){
+			var jsonObj = JSON.parse(data);
+			var faceCount = jsonObj.info.faceCount;
+			alert(faceCount);
+			/* var landmark = jsonObj.faces[0].landmark; */
+			if(faceCount == '0' ){
+				alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+			}else{
+				if(jsonObj.faces[0].landmark == null){
+					alert("눈 코 입이 제대로 보이질 않아요 ");
+				}else{
+					alert("사람임");
+				}	
+			
+		}
+		},
+		error:function(request, status, errorData){
+			alert("error code: " + request.status + "\n"
+					+"message: " + request.responseText
+					+"error: " + errorData);
+		}
+	});
+
+ } 
+ 
+
+function kakaologout(){
+	Kakao.Auth.logout();
+	alert("로그아웃");
+}
+>>>>>>> refs/remotes/origin/master
 
 
 
 >>>>>>> refs/remotes/origin/master
 				// Get the modal
 		        var modal = document.getElementById('myModal');
+				
 		        var myimg = document.getElementById("myimg");
 		        // Get the <span> element that closes the modal
 		        var span = document.getElementsByClassName("close")[0];                                          
@@ -300,12 +892,13 @@ display:none;
 		        var imgcount = 0;
 		        var Hobbycount = 0;
 		        
+		        //로그인 버튼
 		        myimg.onclick = function() {
 		            modal.style.display = "block";
 		            loginview.style.display = "block";
 		        	infoView.style.display = "none";
 		        }
-		        
+		        //회원가입 시작 버튼
 		        insertmemberview.onclick = function(){
 		        	loginview.style.display = "none";
 		        	infoView.style.display = "block";
@@ -313,7 +906,7 @@ display:none;
 		        	infoView2.style.display = "none";
 		        	infoView3.style.display = "none";
 		        }
-		        
+		        //회원가입 첫페이지 유효성 검사 및 두번째 페이지로 넘어가는 버튼
 		        nextpage1.onclick=function(){
 		        	if(idUsable ==true && pwdUsable ==true && nickUsable ==true && phoneUsable ==true){
 		        	infoView1.style.display = "none";
@@ -358,12 +951,13 @@ display:none;
 						}
 		        	}
 		        } 
+		        //회원가입 2번째 화면에서 첫번째로 이동하는 이전 버튼
 		        inforbtn.onclick=function(){
 		        	infoView1.style.display = "block";
 		        	infoView2.style.display = "none";
 		        	infoView3.style.display = "none";
 		        }
-		        
+		        //회원가입 2번째 페이지에서 3번째 페이지로 이동 하는 버튼 및 유효성 검사
 		        lastpage.onclick=function(){
 		        	if(phoneUsable ==true && heightUsable == true && ageUsable==true && addressUsable==true &&
 		        			Hobbycount>=3)
@@ -412,12 +1006,13 @@ display:none;
 						}
 		        	}
 		        }
-		        
+		        //회원가입 마지막 페이지에서 2번째 페이지로 이동하는 버튼 
 		        nextpage.onclick=function(){
 		        	infoView1.style.display = "none";
 		        	infoView2.style.display = "block";
 		        	infoView3.style.display = "none";
 		        }
+		        //비밀번호 찾기
 		        pwdCheck.onclick=function(){
 		        	loginview.style.display = "none";
 		        	pwdCheckView.style.display = "block";
@@ -591,7 +1186,7 @@ display:none;
 			             });
 		        	} 
 		        }
-		        
+		        //div로 이미지 등록 하는 법
 		         $(function(LoadImg){
    					$("#fileArea").hide(); 
    					
@@ -615,17 +1210,115 @@ display:none;
 							reader.onload = function(e) {
 								switch (num) {
 								case 1:
-									$("#firstImg").attr("src", e.target.result);
-									imgtitle = true;
-									alert(imgtitle);
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg1")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#firstImg").attr("src", "resources/images/image.png");
+												imgtitle = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													$("#firstImg").attr("src", "resources/images/image.png");
+													imgtitle = false;
+												}else{
+													alert("사람임");
+													$("#firstImg").attr("src", e.target.result);
+													imgtitle = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								case 2:
-									$("#secondImg").attr("src", e.target.result);
-									imgsub = true;
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg2")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#secondImg").attr("src", "resources/images/image.png");
+												imgsub = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													$("#secondImg").attr("src", "resources/images/image.png");
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													imgsub = false;
+												}else{
+													alert("사람임");
+													$("#secondImg").attr("src", e.target.result);
+													imgsub = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								case 3:
-									$("#thirdImg").attr("src", e.target.result);
-									imgsp = true;
+									var formData = new FormData();
+									formData.append("imgtest",$("#thumbnailImg2")[0].files[0]); 
+									$.ajax({
+										url: "imgCheckTest.do",
+										data : formData,
+										processData:false,
+										contentType:false,
+										type:'POST',
+										dataType:'JSON',
+										success: function(data){
+											var jsonObj = JSON.parse(data);
+											var faceCount = jsonObj.info.faceCount;
+											/* var landmark = jsonObj.faces[0].landmark; */
+											if(faceCount == '0' ){
+												alert("얼굴이 제대로 안나온 사진이네요 ㅠㅠ");
+												$("#thirdImg").attr("src", "resources/images/image.png");
+												imgsp = false;
+											}else{
+												if(jsonObj.faces[0].landmark == null){
+													$("#thirdImg").attr("src", "resources/images/image.png");
+													alert("눈 코 입이 제대로 보이질 않아요 ");
+													imgsp = false;
+												}else{
+													alert("사람임");
+													$("#thirdImg").attr("src", e.target.result);
+													imgsp = true;
+												}	
+										}
+										},
+										error:function(request, status, errorData){
+											alert("error code: " + request.status + "\n"
+													+"message: " + request.responseText
+													+"error: " + errorData);
+										}
+									});
 									break;
 								}
 							}
@@ -1503,17 +2196,18 @@ $(function() {
                         <div class="text_wrap">
                             <p class="title_st1 eng">당신의 연예는</p>
                                  <p class="f_logo">
-                                <img src="resources/face/G.JPG" /></p> 
+                               <img src="resources/images/.JPG" /></p> 
                                 <p class="f_name">아</p>
                                 <p class="f_description">아무나</p>
                         </div>
                         <div class="img_wrap">
-                        <img src="resources/face/G3.JPG" /></div>
+                        <img src="resources/images/준하1.jpg" />
+                        </div>
                         <div class="slider_ar">
                             <div class="count count2">
                                 <span class="idx">01</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>
@@ -1523,16 +2217,20 @@ $(function() {
                     <div class="content">
                         <div class="text_wrap">
                             <p class="title_st1 eng">언제 어디서 든지 </p>
-                                <!-- <p class="f_logo"><img src="/public/upload/20190403/e09687523ec0d37ee5e86882979561aa.png" /></p> -->
+                                 <p class="f_logo">
+                                 <img src="resources/images/진형.JPG" />
+                                </p>
                                 <p class="f_name">만</p>
                                 <p class="f_description">만난</p>
                         </div>
-                        <div class="img_wrap"></div>
+                        <div class="img_wrap">
+                        <img src="resources/images/진형.jpg" />
+                        </div>
                         <div class="slider_ar">
                             <div class="count count2">
                                 <span class="idx">02</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>
@@ -1542,20 +2240,71 @@ $(function() {
                     <div class="content">
                         <div class="text_wrap">
                             <p class="title_st1 eng">아만다에서 만나세요</p>
-                                <!-- <p class="f_logo"><img src="/public/upload/20190322/49c3cc4c3f202dab5813136402dc48fe.jpg" /></p> -->
+                                <p class="f_logo">
+                                <img src="resources/images/상훈.JPG" />
+                                </p>
                                 <p class="f_name">다</p>
                                 <p class="f_description">다</p>
                             
                         </div>
                         <div class="img_wrap">
-                        <img src="resources/face/t2.JPG" />
+                        <img src="resources/images/G.jpg" />
+                        </div>
+                        <div class="slider_ar">
+                            <div class="count count2">
+                                <span class="idx">03</span>
+                                <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
+                                <span class="length">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                 <li class="slide4">
+                    <div class="slider_img"></div>
+                    <div class="content">
+                        <div class="text_wrap">
+                            <p class="title_st1 eng">아만다에서 만나세요</p>
+                                <p class="f_logo">
+                                <img src="resources/images/재윤.JPG" />
+                                </p>
+                                <p class="f_name">다</p>
+                                <p class="f_description">다</p>
+                            
+                        </div>
+                        <div class="img_wrap">
+                        <img src="resources/images/상훈.jpg" />
                         </div>
                         <div class="slider_ar">
 
                             <div class="count count2">
-                                <span class="idx">03</span>
+                                <span class="idx">04</span>
                                 <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
-                                <span class="length">3</span>
+                                <span class="length">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                 <li class="slide5">
+                    <div class="slider_img"></div>
+                    <div class="content">
+                        <div class="text_wrap">
+                            <p class="title_st1 eng">아만다에서 만나세요</p>
+                                <p class="f_logo">
+                                <img src="/public/upload/20190322/49c3cc4c3f202dab5813136402dc48fe.jpg" />
+                                </p>
+                                <p class="f_name">다</p>
+                                <p class="f_description">다</p>
+                            
+                        </div>
+                        <div class="img_wrap">
+                        <img src="resources/images/재윤.jpg" />
+                        </div>
+                        <div class="slider_ar">
+
+                            <div class="count count2">
+                                <span class="idx">05</span>
+                                <span class="dash"><img src="/public/images/slide_count_bar_g.png" alt="" /></span>
+                                <span class="length">5</span>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,7 @@
 #NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+<<<<<<< HEAD
 #Wed Dec 04 01:24:26 KST 2019
+=======
+#Tue Dec 10 18:12:49 KST 2019
+>>>>>>> refs/remotes/origin/master
 httpcore-4.0.1.pom>central=

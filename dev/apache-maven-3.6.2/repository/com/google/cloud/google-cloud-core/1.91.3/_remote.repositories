@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 10 20:48:39 KST 2019
+google-cloud-core-1.91.3.jar>central=
+google-cloud-core-1.91.3.pom>central=
+google-cloud-core-1.91.3-sources.jar>central=

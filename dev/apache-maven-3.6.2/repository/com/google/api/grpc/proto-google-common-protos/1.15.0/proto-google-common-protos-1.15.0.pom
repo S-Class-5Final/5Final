@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.google.api.grpc</groupId>
+  <artifactId>proto-google-common-protos</artifactId>
+  <version>1.15.0</version>
+  <name>Google Cloud Common Protos for Java</name>
+  <description>Google Cloud Common Protos for Java</description>
+  <url>https://github.com/googleapis/common-protos-java</url>
+  <licenses>
+    <license>
+      <name>Apache</name>
+      <url>https://github.com/googleapis/common-protos-java/blob/master/LICENSE</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>GoogleAPIs</id>
+      <name>GoogleAPIs</name>
+      <email>googleapis@googlegroups.com</email>
+      <url>https://github.com/googleapis/common-protos-java</url>
+      <organization>Google, Inc.</organization>
+      <organizationUrl>https://www.google.com</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/googleapis/common-protos-java.git</connection>
+    <url>https://github.com/googleapis/common-protos-java</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>3.6.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
