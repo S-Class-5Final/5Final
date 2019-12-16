@@ -142,7 +142,7 @@ public class MemberController {
 			}
 
 		
-		return "common/matching";
+		return "home";
 	}
 	
 	//회원가입 아이디 유효성 검사

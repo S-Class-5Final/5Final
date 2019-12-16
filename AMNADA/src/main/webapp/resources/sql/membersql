@@ -43,4 +43,10 @@ CREATE TABLE MEMBERIMG (
 );
 create SEQUENCE SEQ_UID;
 
+<<<<<<< HEAD
 COMMIT;
+=======
+COMMIT;
+
+
+>>>>>>> refs/remotes/origin/master
